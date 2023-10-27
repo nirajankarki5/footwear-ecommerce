@@ -5,3 +5,7 @@ populate.js - populate database with json data from data.js
 
 API:
 get all products: http://localhost:5000/api/products
+get product by id: http://localhost:5000/api/products/653bdff1e7b35dd90c43a565
+insert product: http://localhost:5000/api/products
+delete product: http://localhost:5000/api/products/653bdff1e7b35dd90c43a565
+update product: http://localhost:5000/api/products/653bdff1e7b35dd90c43a565
