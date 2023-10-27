@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import UserDetails from "./pages/UserDetails";
 import Error from "./pages/Error";
 import Cart from "./pages/Cart";
+import Signup from "./pages/Signup";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="*" element={<Error />} />
         </Route>
         <Route path="login" element={<Login />} />
+        <Route path="signup" element={<Signup />} />
       </Routes>
     </BrowserRouter>
   );
