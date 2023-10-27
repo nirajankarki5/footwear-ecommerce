@@ -1,0 +1,7 @@
+SERVER:
+
+populate.js - populate database with json data from data.js
+
+
+API:
+get all products: http://localhost:5000/api/products
