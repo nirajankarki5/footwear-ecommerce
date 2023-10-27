@@ -1,5 +1,7 @@
+const products = require("../data");
+
 const getAllProducts = (req, res) => {
-  res.send("Home Page");
+  res.json({ products });
 };
 
 module.exports = {
