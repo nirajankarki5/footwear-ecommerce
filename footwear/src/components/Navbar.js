@@ -7,12 +7,12 @@ import { Link } from "react-router-dom";
 function Navbar() {
   const [isNavLinkShown, setIsNavLinkShown] = useState(false);
   return (
-    <nav className="font-body flex items-center justify-between border-y-2 px-5 py-4">
+    <nav className="font-body flex h-20 items-center justify-between border-y-2 px-5 py-4">
       <Link to="/">
         <h1 className="p-0 text-3xl font-bold">FootWear</h1>
       </Link>
       <HiBars3
-        className="cursor-pointer text-3xl md:hidden"
+        className="cursor-pointer text-4xl md:hidden"
         onClick={() => setIsNavLinkShown(!isNavLinkShown)}
       />
       <div
