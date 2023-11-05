@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts, setLoadingFalse } from "../features/product/productSlice";
+import { getProducts, setLoading } from "../features/product/productSlice";
 import ProductCard from "../components/ProductCard";
 import shoeImg from "../assets/images/shoes-home.jpg";
 
@@ -10,13 +10,14 @@ function Home() {
 
   const fetchProducts = useCallback(async () => {
     try {
+      dispatch(setLoading(true));
       const response = await fetch("http://localhost:5000/api/products");
       const data = await response.json();
 
       dispatch(getProducts(data));
     } catch (error) {
       console.log(error);
-      dispatch(setLoadingFalse);
+      dispatch(setLoading(false));
     }
   }, [dispatch]);
 
@@ -37,8 +38,12 @@ function Home() {
       </section>
 
       <section>
-        {isLoading && <p>Loading.....</p>}
-        {products.length === 0 && <p>No products</p>}
+        {isLoading && (
+          <p className="text-center text-2xl text-gray-300">Loading.....</p>
+        )}
+        {!isLoading && products.length === 0 && (
+          <p className="text-center text-2xl text-gray-300">No products</p>
+        )}
 
         {!isLoading && products.length > 0 && (
           <div className="mx-auto mb-20 grid w-[85%] gap-5 sm:w-[95%] sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">

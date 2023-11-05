@@ -14,11 +14,11 @@ const productSlice = createSlice({
       state.isLoading = false;
     },
 
-    setLoadingFalse(state) {
-      state.isLoading = false;
+    setLoading(state, action) {
+      state.isLoading = action.payload;
     },
   },
 });
 
-export const { getProducts, setLoadingFalse } = productSlice.actions;
+export const { getProducts, setLoading } = productSlice.actions;
 export default productSlice.reducer;
