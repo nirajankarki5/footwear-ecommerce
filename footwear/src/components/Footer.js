@@ -2,7 +2,7 @@ import React from "react";
 
 function Footer() {
   return (
-    <footer className="font-body grid grid-rows-2 justify-between bg-stone-900 p-6 py-8 text-gray-300 lg:grid-cols-2 lg:grid-rows-1 lg:gap-8 lg:p-10 lg:py-12">
+    <footer className="font-body grid grid-rows-2 justify-between bg-stone-900 p-6 py-8 text-gray-300 lg:grid-cols-2 lg:grid-rows-1 lg:gap-8 lg:p-10 lg:py-12 xl:py-16">
       <section className="text-sm lg:text-lg">
         <h1 className="text-2xl font-semibold lg:text-3xl">FootWear</h1>
         <p className="my-5 md:text-base">

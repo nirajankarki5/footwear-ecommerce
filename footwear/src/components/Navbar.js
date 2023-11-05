@@ -28,15 +28,21 @@ function Navbar() {
           placeholder="Search product..."
         />
         <div className="flex w-60 gap-3 rounded-full border-2 px-4 py-2 md:w-auto">
-          <div className="flex cursor-pointer items-center gap-1 text-xs">
+          <Link
+            to={"cart"}
+            className="flex cursor-pointer items-center gap-1 text-xs"
+          >
             <HiOutlineShoppingBag className="text-3xl" />
             <p className="md:hidden lg:block">Cart</p>
-          </div>
+          </Link>
           <div className="border-2"></div>
-          <div className="flex cursor-pointer items-center gap-1 text-xs">
+          <Link
+            to={"user"}
+            className="flex cursor-pointer items-center gap-1 text-xs"
+          >
             <HiOutlineUserCircle className="text-3xl" />
             <p className="md:hidden lg:block">My account</p>
-          </div>
+          </Link>
         </div>
       </div>
     </nav>
