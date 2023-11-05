@@ -1,6 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 function Home() {
+  const fetchProducts = async () => {
+    const response = await fetch("http://localhost:5000/api/products");
+    const data = await response.json();
+
+    console.log(data);
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
   return (
     <div className="font-body ">
       <section className="my-10 text-center md:my-12 lg:my-14">
@@ -12,6 +23,8 @@ function Home() {
           dream shoes.
         </p>
       </section>
+
+      <section></section>
     </div>
   );
 }
