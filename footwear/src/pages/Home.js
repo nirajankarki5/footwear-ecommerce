@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProducts, setLoading } from "../features/product/productSlice";
 import ProductCard from "../components/ProductCard";
 import shoeImg from "../assets/images/shoes-home.jpg";
+import BlackButton from "../components/BlackButton";
 
 function Home() {
   const { products, isLoading } = useSelector((store) => store.product);
@@ -53,6 +54,10 @@ function Home() {
           </div>
         )}
       </section>
+
+      <div className="text-center">
+        <BlackButton>View More</BlackButton>
+      </div>
 
       <section className="my-10 text-center sm:my-14 lg:my-20">
         <h1 className=" text-3xl font-medium md:text-4xl lg:text-5xl">
