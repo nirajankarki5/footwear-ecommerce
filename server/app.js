@@ -1,6 +1,7 @@
 const express = require("express");
 require("dotenv").config();
 require("express-async-errors");
+const cors = require("cors");
 
 const connectDB = require("./db/connect");
 const productsRoute = require("./routes/products");
@@ -8,6 +9,9 @@ const notFound = require("./middleware/not-found");
 const errorHandler = require("./middleware/error-handler");
 
 const app = express();
+
+// Enable all CORS requests
+app.use(cors());
 
 // middlewares
 app.use(express.json());
