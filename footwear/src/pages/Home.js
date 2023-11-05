@@ -1,16 +1,26 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getProducts, setLoadingFalse } from "../features/product/productSlice";
 
 function Home() {
-  const fetchProducts = async () => {
-    const response = await fetch("http://localhost:5000/api/products");
-    const data = await response.json();
+  const { products, isLoading } = useSelector((store) => store.product);
+  const dispatch = useDispatch();
 
-    console.log(data);
-  };
+  const fetchProducts = useCallback(async () => {
+    try {
+      const response = await fetch("http://localhost:5000/api/products");
+      const data = await response.json();
+
+      dispatch(getProducts(data));
+    } catch (error) {
+      console.log(error);
+      dispatch(setLoadingFalse);
+    }
+  }, [dispatch]);
 
   useEffect(() => {
     fetchProducts();
-  }, []);
+  }, [fetchProducts]);
 
   return (
     <div className="font-body ">
@@ -24,7 +34,18 @@ function Home() {
         </p>
       </section>
 
-      <section></section>
+      <section>
+        {isLoading && <p>Loading.....</p>}
+        {products.length === 0 && <p>No products</p>}
+
+        {!isLoading &&
+          products.length > 0 &&
+          products.map((product) => (
+            <div>
+              <p>{product.name}</p>
+            </div>
+          ))}
+      </section>
     </div>
   );
 }
