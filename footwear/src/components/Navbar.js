@@ -30,6 +30,7 @@ function Navbar() {
         <div className="flex w-60 gap-3 rounded-full border-2 px-4 py-2 md:w-auto">
           <Link
             to={"cart"}
+            onClick={() => setIsNavLinkShown(false)}
             className="flex cursor-pointer items-center gap-1 text-xs"
           >
             <HiOutlineShoppingBag className="text-3xl" />
@@ -38,6 +39,9 @@ function Navbar() {
           <div className="border-2"></div>
           <Link
             to={"user"}
+            onClick={() => {
+              setIsNavLinkShown(false);
+            }}
             className="flex cursor-pointer items-center gap-1 text-xs"
           >
             <HiOutlineUserCircle className="text-3xl" />
