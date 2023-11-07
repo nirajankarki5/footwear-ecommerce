@@ -14,6 +14,7 @@ function Navbar() {
     e.preventDefault();
     console.log(searchTerm);
     navigate(`/search?searchTerm=${searchTerm}`);
+    setIsNavLinkShown(false);
 
     setSearchTerm("");
   };
