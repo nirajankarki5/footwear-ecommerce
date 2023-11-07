@@ -40,10 +40,14 @@ function Home() {
 
       <section>
         {isLoading && (
-          <p className="text-center text-2xl text-gray-300">Loading.....</p>
+          <p className="mb-10 text-center text-2xl text-gray-300">
+            Loading.....
+          </p>
         )}
         {!isLoading && products.length === 0 && (
-          <p className="text-center text-2xl text-gray-300">No products</p>
+          <p className="mb-10 text-center text-2xl text-gray-300">
+            No products
+          </p>
         )}
 
         {!isLoading && products.length > 0 && (

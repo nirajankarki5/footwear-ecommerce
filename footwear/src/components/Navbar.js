@@ -2,10 +2,22 @@ import React, { useState } from "react";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { HiOutlineUserCircle } from "react-icons/hi2";
 import { HiBars3 } from "react-icons/hi2";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Navbar() {
   const [isNavLinkShown, setIsNavLinkShown] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const navigate = useNavigate();
+
+  const onSearchSubmit = (e) => {
+    e.preventDefault();
+    console.log(searchTerm);
+    navigate(`/search?searchTerm=${searchTerm}`);
+
+    setSearchTerm("");
+  };
+
   return (
     <nav className="font-body flex h-20 items-center justify-between border-y-2 px-5 py-4 lg:px-10">
       <Link to="/">
@@ -22,11 +34,16 @@ function Navbar() {
             : "hidden"
         }  md:flex md:w-1/2 md:justify-between lg:gap-10`}
       >
-        <input
-          className="h-12 w-full rounded-full border-2 bg-stone-50 px-4 py-0 focus:bg-stone-100 focus:outline-none md:w-3/5"
-          type="text"
-          placeholder="Search product..."
-        />
+        <form className="mr-1 w-full" onSubmit={onSearchSubmit}>
+          <input
+            className="h-12 w-full rounded-full border-2 bg-stone-50 px-4 py-0 focus:bg-stone-100 focus:outline-none"
+            type="text"
+            placeholder="Search product..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </form>
+
         <div className="flex w-60 gap-3 rounded-full border-2 px-4 py-2 md:w-auto">
           <Link
             to={"cart"}
@@ -45,7 +62,7 @@ function Navbar() {
             className="flex cursor-pointer items-center gap-1 text-xs"
           >
             <HiOutlineUserCircle className="text-3xl" />
-            <p className="md:hidden lg:block">My account</p>
+            <p className="md:hidden lg:block">My&nbsp;account</p>
           </Link>
         </div>
       </div>
