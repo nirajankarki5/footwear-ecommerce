@@ -1,35 +1,14 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { IoMdFunnel } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import ProductCard from "../components/ProductCard";
-import { getProducts, setLoading } from "../features/product/productSlice";
 
 function SearchProduct() {
-  const [searchParams, setSearchParams] = useSearchParams();
   const [isFilterShown, setIsFilterShown] = useState(false);
 
   const { products, isLoading } = useSelector((store) => store.product);
   const dispatch = useDispatch();
-
-  console.log(searchParams.get("searchTerm"));
-
-  const fetchProducts = useCallback(async () => {
-    try {
-      dispatch(setLoading(true));
-      const response = await fetch("http://localhost:5000/api/products");
-      const data = await response.json();
-
-      dispatch(getProducts(data));
-    } catch (error) {
-      console.log(error);
-      dispatch(setLoading(false));
-    }
-  }, [dispatch]);
-
-  useEffect(() => {
-    fetchProducts();
-  }, [fetchProducts]);
 
   return (
     <div className="my-8 grid gap-8 px-5 md:grid-cols-[1fr_3fr] md:gap-5 lg:gap-5 lg:px-10 xl:grid-cols-[1fr_4fr]">

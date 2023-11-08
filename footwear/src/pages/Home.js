@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts, setLoading } from "../features/product/productSlice";
+import { fetchProducts } from "../features/product/productSlice";
 import ProductCard from "../components/ProductCard";
 import shoeImg from "../assets/images/shoes-home.jpg";
 import BlackButton from "../components/BlackButton";
@@ -9,22 +9,9 @@ function Home() {
   const { products, isLoading } = useSelector((store) => store.product);
   const dispatch = useDispatch();
 
-  const fetchProducts = useCallback(async () => {
-    try {
-      dispatch(setLoading(true));
-      const response = await fetch("http://localhost:5000/api/products");
-      const data = await response.json();
-
-      dispatch(getProducts(data));
-    } catch (error) {
-      console.log(error);
-      dispatch(setLoading(false));
-    }
-  }, [dispatch]);
-
   useEffect(() => {
-    fetchProducts();
-  }, [fetchProducts]);
+    dispatch(fetchProducts("http://localhost:5000/api/products"));
+  }, [dispatch]);
 
   return (
     <div className="font-body ">

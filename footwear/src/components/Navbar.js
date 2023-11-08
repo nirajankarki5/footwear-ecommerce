@@ -2,21 +2,27 @@ import React, { useState } from "react";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { HiOutlineUserCircle } from "react-icons/hi2";
 import { HiBars3 } from "react-icons/hi2";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { fetchProducts } from "../features/product/productSlice";
 
 function Navbar() {
   const [isNavLinkShown, setIsNavLinkShown] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
   const onSearchSubmit = (e) => {
     e.preventDefault();
-    console.log(searchTerm);
-    navigate(`/search?searchTerm=${searchTerm}`);
-    setIsNavLinkShown(false);
 
-    setSearchTerm("");
+    dispatch(
+      fetchProducts(
+        `http://localhost:5000/api/products?searchTerm=${searchTerm}`,
+      ),
+    );
+    navigate(`/search`);
+    setIsNavLinkShown(false);
   };
 
   return (
