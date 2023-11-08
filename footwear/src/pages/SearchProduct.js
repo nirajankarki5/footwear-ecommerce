@@ -1,6 +1,5 @@
-import React, { useState } from "react";
-import { useSearchParams } from "react-router-dom";
-import { IoMdFunnel } from "react-icons/io";
+import React, { useEffect, useState } from "react";
+import { HiAdjustments } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
 import ProductCard from "../components/ProductCard";
 
@@ -10,6 +9,10 @@ function SearchProduct() {
   const { products, isLoading } = useSelector((store) => store.product);
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="my-8 grid gap-8 px-5 md:grid-cols-[1fr_3fr] md:gap-5 lg:gap-5 lg:px-10 xl:grid-cols-[1fr_4fr]">
       <section
@@ -17,8 +20,8 @@ function SearchProduct() {
           isFilterShown ? "pb-5 pl-5 shadow-sm" : "shadow-none"
         } md:shadow-none`}
       >
-        <IoMdFunnel
-          className="ml-auto cursor-pointer border-2 border-gray-400 bg-gray-200 p-1 text-5xl md:hidden"
+        <HiAdjustments
+          className="ml-auto cursor-pointer border-2 border-gray-300 bg-gray-100 p-1 text-5xl md:hidden"
           onClick={() => setIsFilterShown(!isFilterShown)}
         />
 
