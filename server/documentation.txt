@@ -12,3 +12,4 @@ update product: http://localhost:5000/api/products/653bdff1e7b35dd90c43a565
 
 search by name: http://localhost:5000/api/products?searchTerm=nike
 search by name and BRAND: http://localhost:5000/api/products?searchTerm=nike&brand=nike
+search by name and BRAND and SIZE: http://localhost:5000/api/products?searchTerm=nike&brand=nike&size=15

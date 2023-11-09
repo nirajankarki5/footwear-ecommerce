@@ -1,7 +1,7 @@
 const Product = require("../models/Product");
 
 const getAllProducts = async (req, res) => {
-  const { searchTerm, brand } = req.query;
+  const { searchTerm, brand, size } = req.query;
   const queryObject = {};
 
   if (searchTerm) {
@@ -9,6 +9,9 @@ const getAllProducts = async (req, res) => {
   }
   if (brand) {
     queryObject.brand = { $regex: brand, $options: "i" };
+  }
+  if (size) {
+    queryObject.sizes = { $in: size };
   }
 
   const products = await Product.find(queryObject);
