@@ -1,10 +1,11 @@
 import React from "react";
 
-function SearchDropdown({ type, options, handleChange }) {
+function SearchDropdown({ type, options, handleChange, value }) {
   return (
     <select
+      value={value}
       onChange={(e) => handleChange(e, type)}
-      className="mb-2 w-full cursor-pointer rounded-full border-red-500 bg-stone-100 px-5 py-4 text-lg xl:mb-5 2xl:w-2/3"
+      className="mb-2 mb-5 block w-full cursor-pointer rounded-full border-red-500 bg-stone-100 px-5 py-4 text-lg"
     >
       {options.map((option, index) => (
         <option key={index} value={option.value}>

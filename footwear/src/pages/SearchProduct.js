@@ -4,10 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import ProductCard from "../components/ProductCard";
 import SearchDropdown from "../components/SearchDropdown";
 import { fetchProducts } from "../features/product/productSlice";
+import Loading from "../components/Loading";
 
 function SearchProduct() {
   const [isFilterShown, setIsFilterShown] = useState(false);
 
+  const [brand, setBrand] = useState("");
+  const [size, setSize] = useState("");
   const [queryStringBrand, setQueryStringBrand] = useState("");
   const [queryStringSize, setQueryStringSize] = useState("");
 
@@ -23,12 +26,14 @@ function SearchProduct() {
     console.log(type, e.target.value);
 
     if (type === "Brand") {
+      setBrand(e.target.value);
       setQueryStringBrand("brand=" + e.target.value);
       if (e.target.value === "Select Brand") {
         setQueryStringBrand("");
       }
     }
     if (type === "Size") {
+      setSize(e.target.value);
       setQueryStringSize("size=" + e.target.value);
       if (e.target.value === "Select Size") {
         setQueryStringSize("");
@@ -47,6 +52,7 @@ function SearchProduct() {
     if (queryStringBrand && queryStringSize) {
       url = `?searchTerm=${productSearchTerm}&${queryStringBrand}&${queryStringSize}`;
     }
+    console.log(queryStringBrand);
     console.log(url);
     dispatch(fetchProducts(url));
   };
@@ -57,6 +63,7 @@ function SearchProduct() {
 
   // When reloading search page, display all the products
   useEffect(() => {
+    // do not refetch data if there is search Term bacause we have already fetched data in navbar page
     if (!productSearchTerm) {
       fetchSearchProducts();
     }
@@ -64,6 +71,7 @@ function SearchProduct() {
 
   return (
     <div className="my-8 grid gap-8 px-5 md:grid-cols-[1fr_3fr] md:gap-5 lg:gap-5 lg:px-10 xl:grid-cols-[1fr_4fr]">
+      {/****************  FILTER SECTION ******************/}
       <section
         className={`${
           isFilterShown ? "pb-5 pl-5 shadow-sm" : "shadow-none"
@@ -81,6 +89,7 @@ function SearchProduct() {
           } text-center md:block`}
         >
           <SearchDropdown
+            value={brand}
             type={"Brand"}
             options={[
               { label: "Select Brand", value: null },
@@ -92,6 +101,7 @@ function SearchProduct() {
           />
 
           <SearchDropdown
+            value={size}
             type={"Size"}
             options={[
               { label: "Select Size", value: null },
@@ -113,19 +123,26 @@ function SearchProduct() {
 
           <button
             onClick={fetchSearchProducts}
-            className="rounded-full border-none bg-stone-900 px-5 py-3 text-gray-200 lg:px-6 lg:py-4"
+            className="block rounded-full border-none bg-stone-900 px-5 py-3 text-sm text-gray-200 lg:px-5 lg:py-4"
           >
             Apply Filters
+          </button>
+          <button
+            onClick={() => {
+              dispatch(fetchProducts(`?searchTerm=${productSearchTerm}`));
+              setBrand("");
+              setSize("");
+            }}
+            className="mt-3 block rounded-full border-none bg-gray-200 px-5 py-3 text-sm text-stone-900 lg:px-5 lg:py-4"
+          >
+            Remove Filters
           </button>
         </div>
       </section>
 
+      {/***********************  PRODUCT DISPLAY SECTION ******************/}
       <section>
-        {isLoading && (
-          <p className="mb-10 text-center text-2xl text-gray-300">
-            Loading.....
-          </p>
-        )}
+        {isLoading && <Loading />}
         {!isLoading && products.length === 0 && (
           <p className="mb-10 text-center text-2xl text-gray-300">
             No products

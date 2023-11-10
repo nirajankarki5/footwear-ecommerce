@@ -4,6 +4,7 @@ import { fetchProducts } from "../features/product/productSlice";
 import ProductCard from "../components/ProductCard";
 import shoeImg from "../assets/images/shoes-home.jpg";
 import BlackButton from "../components/BlackButton";
+import Loading from "../components/Loading";
 
 function Home() {
   const { products, isLoading } = useSelector((store) => store.product);
@@ -26,11 +27,7 @@ function Home() {
       </section>
 
       <section>
-        {isLoading && (
-          <p className="mb-10 text-center text-2xl text-gray-300">
-            Loading.....
-          </p>
-        )}
+        {isLoading && <Loading />}
         {!isLoading && products.length === 0 && (
           <p className="mb-10 text-center text-2xl text-gray-300">
             No products
