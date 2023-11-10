@@ -11,9 +11,11 @@ function SearchProduct() {
   const [queryStringBrand, setQueryStringBrand] = useState("");
   const [queryStringSize, setQueryStringSize] = useState("");
 
-  let url = "http://localhost:5000/api/products";
+  let url = "";
 
-  const { products, isLoading } = useSelector((store) => store.product);
+  const { products, isLoading, productSearchTerm } = useSelector(
+    (store) => store.product,
+  );
   const dispatch = useDispatch();
 
   // everytime we change value from the dropdown
@@ -21,7 +23,7 @@ function SearchProduct() {
     console.log(type, e.target.value);
 
     if (type === "Brand") {
-      setQueryStringBrand("?brand=" + e.target.value);
+      setQueryStringBrand("brand=" + e.target.value);
       if (e.target.value === "Select Brand") {
         setQueryStringBrand("");
       }
@@ -37,13 +39,13 @@ function SearchProduct() {
   const fetchSearchProducts = () => {
     // console.log(url + queryString);
     if (queryStringBrand) {
-      url = `http://localhost:5000/api/products${queryStringBrand}`;
+      url = `?searchTerm=${productSearchTerm}&${queryStringBrand}`;
     }
     if (queryStringSize) {
-      url = `http://localhost:5000/api/products?${queryStringSize}`;
+      url = `?searchTerm=${productSearchTerm}&${queryStringSize}`;
     }
     if (queryStringBrand && queryStringSize) {
-      url = `http://localhost:5000/api/products${queryStringBrand}&${queryStringSize}`;
+      url = `?searchTerm=${productSearchTerm}&${queryStringBrand}&${queryStringSize}`;
     }
     console.log(url);
     dispatch(fetchProducts(url));
@@ -55,7 +57,9 @@ function SearchProduct() {
 
   // When reloading search page, display all the products
   useEffect(() => {
-    fetchSearchProducts();
+    if (!productSearchTerm) {
+      fetchSearchProducts();
+    }
   }, [dispatch]);
 
   return (

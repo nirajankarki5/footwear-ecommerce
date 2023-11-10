@@ -4,7 +4,10 @@ import { HiOutlineUserCircle } from "react-icons/hi2";
 import { HiBars3 } from "react-icons/hi2";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { fetchProducts } from "../features/product/productSlice";
+import {
+  fetchProducts,
+  getProductSearchTerm,
+} from "../features/product/productSlice";
 
 function Navbar() {
   const [isNavLinkShown, setIsNavLinkShown] = useState(false);
@@ -16,18 +19,26 @@ function Navbar() {
   const onSearchSubmit = (e) => {
     e.preventDefault();
 
-    dispatch(
-      fetchProducts(
-        `http://localhost:5000/api/products?searchTerm=${searchTerm}`,
-      ),
-    );
+    dispatch(fetchProducts(`?searchTerm=${searchTerm}`));
+    dispatch(getProductSearchTerm(searchTerm));
     navigate(`/search`);
     setIsNavLinkShown(false);
   };
 
+  // reset search term to null when user clicks any link on navbar
+  const onLinkClick = () => {
+    setSearchTerm("");
+  };
+
   return (
-    <nav className="font-body flex h-20 items-center justify-between border-y-2 px-5 py-4 lg:px-10">
-      <Link to="/">
+    <nav className="flex h-20 items-center justify-between border-y-2 px-5 py-4 font-body lg:px-10">
+      <Link
+        to="/"
+        onClick={() => {
+          setIsNavLinkShown(false);
+          onLinkClick();
+        }}
+      >
         <h1 className="p-0 text-3xl font-bold">FootWear</h1>
       </Link>
       <HiBars3
@@ -54,7 +65,10 @@ function Navbar() {
         <div className="flex w-60 gap-3 rounded-full border-2 px-4 py-2 md:w-auto">
           <Link
             to={"cart"}
-            onClick={() => setIsNavLinkShown(false)}
+            onClick={() => {
+              setIsNavLinkShown(false);
+              onLinkClick();
+            }}
             className="flex cursor-pointer items-center gap-1 text-xs"
           >
             <HiOutlineShoppingBag className="text-3xl" />
@@ -65,6 +79,7 @@ function Navbar() {
             to={"user"}
             onClick={() => {
               setIsNavLinkShown(false);
+              onLinkClick();
             }}
             className="flex cursor-pointer items-center gap-1 text-xs"
           >

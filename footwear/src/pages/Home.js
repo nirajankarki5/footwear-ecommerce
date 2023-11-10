@@ -10,7 +10,7 @@ function Home() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchProducts("http://localhost:5000/api/products"));
+    dispatch(fetchProducts("/"));
   }, [dispatch]);
 
   return (

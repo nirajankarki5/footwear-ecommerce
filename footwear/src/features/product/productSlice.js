@@ -1,15 +1,18 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
+const baseUrl = "http://localhost:5000/api/products";
+
 const initialState = {
   isLoading: false,
   products: [],
+  productSearchTerm: "",
 };
 
 export const fetchProducts = createAsyncThunk(
   "product/fetchProducts",
   async (url) => {
     try {
-      const response = await fetch(url);
+      const response = await fetch(baseUrl + url);
       const data = await response.json();
       return data;
     } catch (error) {
@@ -29,6 +32,9 @@ const productSlice = createSlice({
     // setLoading(state, action) {
     //   state.isLoading = action.payload;
     // },
+    getProductSearchTerm(state, action) {
+      state.productSearchTerm = action.payload;
+    },
   },
   extraReducers: {
     [fetchProducts.pending]: (state) => {
@@ -44,5 +50,6 @@ const productSlice = createSlice({
   },
 });
 
-export const { getProducts, setLoading } = productSlice.actions;
+export const { getProducts, setLoading, getProductSearchTerm } =
+  productSlice.actions;
 export default productSlice.reducer;
