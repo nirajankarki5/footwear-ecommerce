@@ -5,7 +5,7 @@ function SearchDropdown({ type, options, handleChange, value }) {
     <select
       value={value}
       onChange={(e) => handleChange(e, type)}
-      className="mb-2 mb-5 block w-full cursor-pointer rounded-full border-red-500 bg-stone-100 px-5 py-4 text-lg"
+      className="mb-5 block w-full cursor-pointer rounded-full border-red-500 bg-stone-100 px-5 py-4 text-lg"
     >
       {options.map((option, index) => (
         <option key={index} value={option.value}>
