@@ -67,7 +67,7 @@ function SearchProduct() {
     if (!productSearchTerm) {
       fetchSearchProducts();
     }
-  }, [dispatch]);
+  }, [fetchSearchProducts, productSearchTerm, dispatch]);
 
   return (
     <div className="my-8 grid gap-8 px-5 md:grid-cols-[1fr_3fr] md:gap-5 lg:gap-5 lg:px-10 xl:grid-cols-[1fr_4fr]">
