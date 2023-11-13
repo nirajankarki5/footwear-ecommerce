@@ -12,21 +12,30 @@ const createUser = async (req, res) => {
   res.status(200).json(user);
 };
 
+const getUserById = async (req, res) => {
+  const user = await User.findOne({ _id: req.params.id });
+  if (!user) {
+    return res.status(404).json({ msg: "User not found" });
+  }
+
+  res.status(200).json(user);
+};
+
 const login = async (req, res) => {
   //   const { email, password } = req.body;
 
   if (!req.body.email || !req.body.password) {
-    throw new CustomAPIError("Must provide email or password", 400);
+    return res.status(400).json({ msg: "You must provide email and password" });
   }
 
   const user = await User.findOne({ email: req.body.email });
   if (!user) {
-    throw new CustomAPIError("User not found", 404);
+    return res.status(404).json({ msg: "User not found" });
   }
 
   const passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
   if (!passwordIsValid) {
-    throw new CustomAPIError("Invalid password", 401);
+    return res.status(401).json({ msg: "Invalid password" });
   }
 
   const token = jwt.sign(
@@ -49,4 +58,4 @@ const logout = async (req, res) => {
   res.status(200).json({ msg: "You have been signed out" });
 };
 
-module.exports = { createUser, login, logout };
+module.exports = { createUser, getUserById, login, logout };

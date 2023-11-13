@@ -18,6 +18,8 @@ search by name and BRAND and SIZE: http://localhost:5000/api/products?searchTerm
 
 
 USER:
-signup: http://localhost:5000/api/sinup
-login: http://localhost:5000/api/login
-logout: http://localhost:5000/api/logout
+signup: http://localhost:5000/api/user/sinup
+get user by ID: http://localhost:5000/api/user/65517b7b153ed81b26ee0635
+// need to pass token in header. Authorization: Bearer $token
+login: http://localhost:5000/api/user/login
+logout: http://localhost:5000/api/uesr/logout
