@@ -21,8 +21,9 @@ const authMiddleware = async (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const { id, email } = decoded;
+    const { id, email } = decoded; // get id and email from token
 
+    // assign id and email to the req.user and fetch id in controller
     req.user = { id, email };
     next();
   } catch (error) {

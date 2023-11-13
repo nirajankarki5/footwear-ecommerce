@@ -4,6 +4,12 @@ const User = require("../models/User");
 const CustomAPIError = require("../errors/custom-error");
 
 const createUser = async (req, res) => {
+  // Check if email already exists in database
+  const emailExist = await User.findOne({ email: req.body.email });
+  if (emailExist) {
+    return res.status(422).json({ msg: "Email already exists" });
+  }
+
   const user = await User.create({
     email: req.body.email,
     password: bcrypt.hashSync(req.body.password, 8),
