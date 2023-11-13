@@ -4,7 +4,10 @@ require("express-async-errors");
 const cors = require("cors");
 
 const connectDB = require("./db/connect");
+// Router
 const productsRoute = require("./routes/products");
+const userRoute = require("./routes/user");
+
 const notFound = require("./middleware/not-found");
 const errorHandler = require("./middleware/error-handler");
 
@@ -18,6 +21,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use("/api/products", productsRoute);
+app.use("/api", userRoute);
 
 app.use(notFound);
 app.use(errorHandler);

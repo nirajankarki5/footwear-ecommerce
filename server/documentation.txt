@@ -4,6 +4,8 @@ populate.js - populate database with json data from data.js
 
 
 API:
+
+PRODUCTS:
 get all products: http://localhost:5000/api/products
 get product by id: http://localhost:5000/api/products/653bdff1e7b35dd90c43a565
 insert product: http://localhost:5000/api/products
@@ -13,3 +15,9 @@ update product: http://localhost:5000/api/products/653bdff1e7b35dd90c43a565
 search by name: http://localhost:5000/api/products?searchTerm=nike
 search by name and BRAND: http://localhost:5000/api/products?searchTerm=nike&brand=nike
 search by name and BRAND and SIZE: http://localhost:5000/api/products?searchTerm=nike&brand=nike&size=15
+
+
+USER:
+signup: http://localhost:5000/api/sinup
+login: http://localhost:5000/api/login
+logout: http://localhost:5000/api/logout
