@@ -35,6 +35,8 @@ const login = async (req, res) => {
     { expiresIn: "30d" }
   );
 
+  //   req.session.token = token;
+
   return res.status(200).json({
     id: user.id,
     email: user.email,
