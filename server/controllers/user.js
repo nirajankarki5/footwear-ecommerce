@@ -12,8 +12,9 @@ const createUser = async (req, res) => {
   res.status(200).json(user);
 };
 
-const getUserById = async (req, res) => {
-  const user = await User.findOne({ _id: req.params.id });
+const getUser = async (req, res) => {
+  console.log(req.user);
+  const user = await User.findOne({ _id: req.user.id });
   if (!user) {
     return res.status(404).json({ msg: "User not found" });
   }
@@ -58,4 +59,4 @@ const logout = async (req, res) => {
   res.status(200).json({ msg: "You have been signed out" });
 };
 
-module.exports = { createUser, getUserById, login, logout };
+module.exports = { createUser, getUser, login, logout };
