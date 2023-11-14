@@ -17,6 +17,7 @@ export const fetchProducts = createAsyncThunk(
       return data;
     } catch (error) {
       console.log(error);
+      return [];
     }
   },
 );
