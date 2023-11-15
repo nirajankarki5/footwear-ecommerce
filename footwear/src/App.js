@@ -9,6 +9,7 @@ import Error from "./pages/Error";
 import Cart from "./pages/Cart";
 import Signup from "./pages/Signup";
 import SearchProduct from "./pages/SearchProduct";
+import AuthLayout from "./pages/AuthLayout";
 
 function App() {
   return (
@@ -24,8 +25,10 @@ function App() {
 
           <Route path="*" element={<Error />} />
         </Route>
-        <Route path="login" element={<Login />} />
-        <Route path="signup" element={<Signup />} />
+        <Route path="auth" element={<AuthLayout />}>
+          <Route path="login" element={<Login />} />
+          <Route path="signup" element={<Signup />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

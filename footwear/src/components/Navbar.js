@@ -34,7 +34,7 @@ function Navbar() {
   };
 
   useEffect(() => {
-    console.log(token);
+    // console.log(token);
     if (token) {
       setIsToken(true);
     }
@@ -86,7 +86,7 @@ function Navbar() {
           </Link>
           <div className="border-2"></div>
           <Link
-            to={isToken ? "user" : "login"}
+            to={isToken ? "user" : "auth/login"}
             onClick={() => {
               setIsNavLinkShown(false);
               onLinkClick();
