@@ -15,7 +15,7 @@ function Home() {
   }, [dispatch]);
 
   return (
-    <div className="font-body ">
+    <>
       <section className="my-10 text-center sm:my-14 lg:my-20">
         <h1 className=" text-3xl font-medium md:text-4xl lg:text-5xl">
           Shop Your Favourite Brand
@@ -73,7 +73,7 @@ function Home() {
           </p>
         </div>
       </section>
-    </div>
+    </>
   );
 }
 
