@@ -7,15 +7,15 @@ function AuthLayout() {
   return (
     <div className="flex h-screen w-screen items-center justify-center bg-stone-200 font-body">
       <div className="grid h-[85%] w-[85%] grid-rows-[2fr_3fr] bg-white sm:h-[80%] sm:w-[70%] lg:grid-cols-[2fr_3fr] lg:grid-rows-none">
-        <section className="items-center py-16 text-center lg:py-44">
+        <section className="items-center py-10 text-center sm:py-14 md:py-20 lg:py-44">
           <Link
             to={"/"}
-            className="text-2xl font-medium text-gray-500 lg:text-3xl"
+            className="text-xl font-medium text-gray-500 md:text-2xl lg:text-3xl"
           >
             FootWear
           </Link>
 
-          <h2 className="mb-4 mt-5 text-3xl font-medium lg:mb-8 lg:mt-10 lg:text-4xl">
+          <h2 className="mb-4 mt-5 text-2xl font-medium md:text-3xl lg:mb-8 lg:mt-10 lg:text-4xl">
             {location.pathname === "/auth/login" ? "Welcome back" : "Join Us"}
           </h2>
 

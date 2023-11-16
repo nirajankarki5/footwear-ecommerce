@@ -1,10 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 import signupImg from "../assets/images/signup.jpg";
 import TextField from "../ui/TextField";
+import { useNavigate } from "react-router-dom";
 
 function Signup() {
-  const handleSubmit = (e) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [repassword, setRepassword] = useState("");
+  const [error, setError] = useState("");
+
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!email || !password) {
+      setError("Email and password both are required");
+      return;
+    }
+
+    if (repassword !== password) {
+      setError("Passwords do not match");
+      return;
+    }
+    try {
+      const response = await fetch("http://localhost:5000/api/user/signup", {
+        method: "POST",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify({ email: email, password: password }),
+      });
+
+      const data = await response.json();
+      if (response.status === 422) {
+        setError(data.msg);
+      }
+
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -26,18 +60,25 @@ function Signup() {
           <TextField
             label="email"
             type="email"
-            onChange={() => console.log("email")}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <TextField
             label="password"
             type="password"
-            onChange={() => console.log("password")}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
           <TextField
             label="Re-type password"
             type="password"
-            onChange={() => console.log("password")}
+            value={repassword}
+            onChange={(e) => {
+              setError("");
+              setRepassword(e.target.value);
+            }}
           />
+          {error && <p className="text-sm text-red-500">{error}</p>}
 
           <button className="mt-2 h-16 rounded-full bg-black text-lg font-medium text-white lg:mt-5">
             Sign up
@@ -48,6 +89,4 @@ function Signup() {
   );
 }
 
-{
-}
 export default Signup;

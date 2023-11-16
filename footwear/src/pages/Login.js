@@ -1,10 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import loginImg from "../assets/images/login.jpg";
 import TextField from "../ui/TextField";
+import useToken from "../hooks/useToken";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
-  const handleSubmit = (e) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const { setToken } = useToken();
+
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!email || !password) {
+      setError("Email and password both are required");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:5000/api/user/login", {
+        method: "POST",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify({ email: email, password: password }),
+      });
+      const data = await response.json();
+
+      setToken(data.token);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -26,15 +54,21 @@ function Login() {
           <TextField
             label="email"
             type="email"
-            onChange={() => console.log("email")}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <TextField
             label="password"
             type="password"
-            onChange={() => console.log("password")}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
+          {error && <p className="text-sm text-red-500">{error}</p>}
 
-          <button className="mt-5 h-16 rounded-full bg-black text-lg font-medium text-white">
+          <button
+            onClick={handleSubmit}
+            className="mt-5 h-16 rounded-full bg-black text-lg font-medium text-white"
+          >
             Login
           </button>
         </form>
