@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { HiAdjustments } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
 import ProductCard from "../components/ProductCard";
@@ -13,8 +13,6 @@ function SearchProduct() {
   const [size, setSize] = useState("");
   const [queryStringBrand, setQueryStringBrand] = useState("");
   const [queryStringSize, setQueryStringSize] = useState("");
-
-  let url = "";
 
   const { products, isLoading, productSearchTerm } = useSelector(
     (store) => store.product,
@@ -41,7 +39,8 @@ function SearchProduct() {
     }
   };
 
-  const fetchSearchProducts = () => {
+  const fetchSearchProducts = useCallback(() => {
+    let url = "";
     // console.log(url + queryString);
     if (queryStringBrand) {
       url = `?searchTerm=${productSearchTerm}&${queryStringBrand}`;
@@ -55,7 +54,7 @@ function SearchProduct() {
     console.log(queryStringBrand);
     console.log(url);
     dispatch(fetchProducts(url));
-  };
+  }, [dispatch, productSearchTerm, queryStringBrand, queryStringSize]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -67,7 +66,7 @@ function SearchProduct() {
     if (!productSearchTerm) {
       fetchSearchProducts();
     }
-  }, [fetchSearchProducts, productSearchTerm, dispatch]);
+  }, [productSearchTerm, fetchSearchProducts]);
 
   return (
     <div className="my-8 grid gap-8 px-5 md:grid-cols-[1fr_3fr] md:gap-5 lg:gap-5 lg:px-10 xl:grid-cols-[1fr_4fr]">
