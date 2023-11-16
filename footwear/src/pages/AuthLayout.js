@@ -19,7 +19,7 @@ function AuthLayout() {
             {location.pathname === "/auth/login" ? "Welcome back" : "Join Us"}
           </h2>
 
-          <p className="px-14 text-justify leading-6 text-gray-400 lg:text-lg lg:leading-7 xl:px-20 xl:text-xl xl:leading-9">
+          <p className="px-8 text-justify text-sm leading-4 text-gray-400 sm:text-base md:px-14 md:leading-6 lg:text-lg lg:leading-7 xl:px-20 xl:text-xl xl:leading-9">
             Footwear was designed and founded in 2023. It's main goal is to
             provide all sorts of products to individuals looking to get a new
             pair of sneakers.

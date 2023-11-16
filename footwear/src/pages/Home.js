@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../features/product/productSlice";
 import ProductCard from "../components/ProductCard";
 import shoeImg from "../assets/images/shoes-home.jpg";
-import BlackButton from "../components/BlackButton";
+import BlackButton from "../ui/BlackButton";
 import Loading from "../components/Loading";
 
 function Home() {
