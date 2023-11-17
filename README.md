@@ -4,7 +4,7 @@
 
 ## Preview
 
-Click [here](https://footwear-ecommerce.vercel.app/) for the preview
+Click [here](https://footwear-ecommerce.vercel.app/){:target="\_blank"} for the preview
 
 ## Tech Stack
 
