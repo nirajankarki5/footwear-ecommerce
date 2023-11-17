@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import signupImg from "../assets/images/signup.jpg";
 import TextField from "../ui/TextField";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { login, setNetworkError, signup } from "../features/user/userSlice";
 
 function Signup() {
   const [email, setEmail] = useState("");
@@ -9,6 +11,8 @@ function Signup() {
   const [repassword, setRepassword] = useState("");
   const [error, setError] = useState("");
 
+  const { networkError } = useSelector((store) => store.user);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -23,21 +27,14 @@ function Signup() {
       setError("Passwords do not match");
       return;
     }
-    try {
-      const response = await fetch("http://localhost:5000/api/user/signup", {
-        method: "POST",
-        headers: { "Content-type": "application/json" },
-        body: JSON.stringify({ email: email, password: password }),
-      });
-
-      const data = await response.json();
-      if (response.status === 422) {
-        setError(data.msg);
+    const status = await dispatch(signup({ email, password }));
+    // Login if signup success
+    if (status === "success") {
+      const loginStatus = await dispatch(login({ email, password }));
+      // navigate to home if login success
+      if (loginStatus === "success") {
+        navigate("/");
       }
-
-      console.log(data);
-    } catch (error) {
-      console.log(error);
     }
   };
 
@@ -61,13 +58,21 @@ function Signup() {
             label="email"
             type="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              setError("");
+              dispatch(setNetworkError(""));
+            }}
           />
           <TextField
             label="password"
             type="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => {
+              setPassword(e.target.value);
+              setError("");
+              dispatch(setNetworkError(""));
+            }}
           />
           <TextField
             label="Re-type password"
@@ -75,10 +80,15 @@ function Signup() {
             value={repassword}
             onChange={(e) => {
               setError("");
+              setError("");
+              dispatch(setNetworkError(""));
               setRepassword(e.target.value);
             }}
           />
           {error && <p className="text-sm text-red-500">{error}</p>}
+          {networkError && (
+            <p className="text-sm text-red-500">{networkError}</p>
+          )}
 
           <button className="mt-2 h-16 rounded-full bg-black text-lg font-medium text-white lg:mt-5">
             Sign up

@@ -1,37 +1,30 @@
 import React, { useState } from "react";
 import loginImg from "../assets/images/login.jpg";
 import TextField from "../ui/TextField";
-import useToken from "../hooks/useToken";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { login, setNetworkError } from "../features/user/userSlice";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const { setToken } = useToken();
+  const { networkError } = useSelector((store) => store.user);
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (!email || !password) {
       setError("Email and password both are required");
       return;
     }
 
-    try {
-      const response = await fetch("http://localhost:5000/api/user/login", {
-        method: "POST",
-        headers: { "Content-type": "application/json" },
-        body: JSON.stringify({ email: email, password: password }),
-      });
-      const data = await response.json();
-
-      setToken(data.token);
+    const status = await dispatch(login({ email, password }));
+    // navigate to home if login success
+    if (status === "success") {
       navigate("/");
-    } catch (error) {
-      console.log(error);
     }
   };
 
@@ -55,15 +48,24 @@ function Login() {
             label="email"
             type="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              dispatch(setNetworkError(""));
+            }}
           />
           <TextField
             label="password"
             type="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => {
+              setPassword(e.target.value);
+              dispatch(setNetworkError(""));
+            }}
           />
           {error && <p className="text-sm text-red-500">{error}</p>}
+          {networkError && (
+            <p className="text-sm text-red-500">{networkError}</p>
+          )}
 
           <button
             onClick={handleSubmit}
