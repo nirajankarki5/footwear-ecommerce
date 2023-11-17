@@ -2,20 +2,19 @@ import React, { useEffect, useState } from "react";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { HiOutlineUserCircle } from "react-icons/hi2";
 import { HiBars3 } from "react-icons/hi2";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import {
   fetchProducts,
   getProductSearchTerm,
 } from "../features/product/productSlice";
-import useToken from "../hooks/useToken";
+import { setUser } from "../features/user/userSlice";
 
 function Navbar() {
   const [isNavLinkShown, setIsNavLinkShown] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const [isToken, setIsToken] = useState(false);
+  const { isUser } = useSelector((store) => store.user);
   const dispatch = useDispatch();
-  const { token } = useToken();
 
   const navigate = useNavigate();
 
@@ -34,11 +33,12 @@ function Navbar() {
   };
 
   useEffect(() => {
-    // console.log(token);
-    if (token) {
-      setIsToken(true);
+    const tokenString = localStorage.getItem("token");
+    const userToken = JSON.parse(tokenString);
+    if (userToken) {
+      dispatch(setUser(true));
     }
-  }, [token]);
+  }, [dispatch]);
 
   return (
     <nav className="flex h-20 items-center justify-between border-y-2 px-5 py-4 font-body lg:px-10">
@@ -86,7 +86,7 @@ function Navbar() {
           </Link>
           <div className="border-2"></div>
           <Link
-            to={isToken ? "user" : "auth/login"}
+            to={isUser ? "user" : "auth/login"}
             onClick={() => {
               setIsNavLinkShown(false);
               onLinkClick();
@@ -94,8 +94,8 @@ function Navbar() {
             className="flex cursor-pointer items-center gap-1 text-xs"
           >
             <HiOutlineUserCircle className="text-3xl" />
-            {isToken && <p className="md:hidden lg:block">My&nbsp;account</p>}
-            {!isToken && <p className="md:hidden lg:block">Login</p>}
+            {isUser && <p className="md:hidden lg:block">My&nbsp;account</p>}
+            {!isUser && <p className="md:hidden lg:block">Login</p>}
           </Link>
         </div>
       </div>

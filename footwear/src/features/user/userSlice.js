@@ -53,12 +53,13 @@ export function login({ email, password }) {
           type: "user/setNetworkError",
           payload: "Invalid credentials",
         });
+        return;
       }
+      return "success";
     } catch (error) {
       console.log(error);
+      return;
     }
-
-    return "success";
   };
 }
 
@@ -83,6 +84,7 @@ export function signup({ email, password }) {
       return "success";
     } catch (error) {
       console.log(error);
+      return;
     }
   };
 }
