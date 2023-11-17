@@ -2,6 +2,10 @@
 
 - An e-commerce app for shoes
 
+## Preview
+
+Click [here](https://footwear-ecommerce.vercel.app/) for the preview
+
 ## Tech Stack
 
 - Node, Express, MongoDB
