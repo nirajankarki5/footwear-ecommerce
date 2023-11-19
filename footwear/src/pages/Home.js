@@ -57,17 +57,17 @@ function Home() {
         </p>
       </section>
 
-      <section className="relative m-10 overflow-hidden rounded-3xl bg-stone-900 text-center text-gray-200 sm:my-14 lg:my-20">
+      <section className="relative mx-5 my-5 overflow-hidden rounded-3xl bg-stone-900 text-center text-gray-200 sm:m-10 sm:my-14 lg:my-20">
         <img
           src={shoeImg}
           alt="shoe"
-          className="h-72 w-full object-cover opacity-20 md:h-96"
+          className="h-96 w-full object-cover opacity-20 md:h-96"
         />
         <div className="absolute left-1/2 top-1/2 translate-x-[-50%] translate-y-[-50%]">
-          <h1 className=" z-10 text-xl font-medium sm:text-2xl md:text-4xl lg:text-5xl">
+          <h1 className=" z-10 text-2xl font-medium sm:text-3xl md:text-4xl lg:text-5xl">
             BRINGING YOU TO UPDATE FANTASTIC FOOTWEAR
           </h1>
-          <p className="mdleading-6 my-3 text-sm leading-5 text-gray-400 sm:text-base md:my-4 md:text-lg lg:my-5 lg:text-xl">
+          <p className="mdleading-6 my-3 text-base leading-5 text-gray-400 sm:text-lg md:my-4 lg:my-5 lg:text-xl">
             View all brands of our collection on FootWear, there is another
             collection. Please check it out.
           </p>
