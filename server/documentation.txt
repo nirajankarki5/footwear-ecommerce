@@ -12,9 +12,15 @@ insert product: http://localhost:5000/api/products
 delete product: http://localhost:5000/api/products/653bdff1e7b35dd90c43a565
 update product: http://localhost:5000/api/products/653bdff1e7b35dd90c43a565
 
+SEARCH PRODUCTS:
 search by name: http://localhost:5000/api/products?searchTerm=nike
 search by name and BRAND: http://localhost:5000/api/products?searchTerm=nike&brand=nike
 search by name and BRAND and SIZE: http://localhost:5000/api/products?searchTerm=nike&brand=nike&size=15
+
+PAGINATION: 
+by default: total number of products (limit) = 15
+by default: page = 1
+http://localhost:5000/api/products?searchTerm=nike&brand=nike&size=8.5&limit=2&page=1
 
 
 USER:
