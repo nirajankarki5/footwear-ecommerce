@@ -4,10 +4,6 @@ import { HiOutlineUserCircle } from "react-icons/hi2";
 import { HiBars3 } from "react-icons/hi2";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  fetchProducts,
-  getProductSearchTerm,
-} from "../features/product/productSlice";
 import { setUser } from "../features/user/userSlice";
 
 function Navbar() {
@@ -21,9 +17,7 @@ function Navbar() {
   const onSearchSubmit = (e) => {
     e.preventDefault();
 
-    dispatch(fetchProducts(`?searchTerm=${searchTerm}`));
-    dispatch(getProductSearchTerm(searchTerm));
-    navigate(`/search`);
+    navigate(`/search?searchTerm=${searchTerm}`);
     setIsNavLinkShown(false);
   };
 

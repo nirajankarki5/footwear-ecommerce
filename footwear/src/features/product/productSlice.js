@@ -5,7 +5,7 @@ const baseUrl = "http://localhost:5000/api/products";
 const initialState = {
   isLoading: false,
   products: [],
-  productSearchTerm: "",
+  // productSearchTerm: "",
 };
 
 export const fetchProducts = createAsyncThunk(
@@ -33,9 +33,9 @@ const productSlice = createSlice({
     // setLoading(state, action) {
     //   state.isLoading = action.payload;
     // },
-    getProductSearchTerm(state, action) {
-      state.productSearchTerm = action.payload;
-    },
+    // getProductSearchTerm(state, action) {
+    //   state.productSearchTerm = action.payload;
+    // },
   },
   extraReducers: {
     [fetchProducts.pending]: (state) => {
