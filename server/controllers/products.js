@@ -14,18 +14,7 @@ const getAllProducts = async (req, res) => {
     queryObject.sizes = { $in: size };
   }
 
-  // const products = await Product.find(queryObject);
-  let result = Product.find(queryObject); // no await here
-
-  // PAGINATION
-  // by default, no of products(limit) is 15 and page is 1
-  const page = req.query.page || 1;
-  const limit = req.query.limit || 15;
-  const skip = (page - 1) * limit;
-
-  result = result.skip(skip).limit(limit);
-  const products = await result; // use await here
-
+  const products = await Product.find(queryObject);
   res.status(200).json(products);
 };
 

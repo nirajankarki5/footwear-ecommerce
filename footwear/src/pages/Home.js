@@ -36,7 +36,7 @@ function Home() {
 
         {!isLoading && products.length > 0 && (
           <div className="mx-auto mb-20 grid w-[85%] gap-5 sm:w-[95%] sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-            {products.map((product) => (
+            {products.slice(0, 15).map((product) => (
               <ProductCard key={product._id} {...product} />
             ))}
           </div>
