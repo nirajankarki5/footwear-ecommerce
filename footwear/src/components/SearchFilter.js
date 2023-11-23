@@ -116,7 +116,9 @@ function SearchFilter() {
         </button>
         <button
           onClick={() => {
-            dispatch(fetchProducts(`?searchTerm=${searchParams}`));
+            dispatch(
+              fetchProducts(`?searchTerm=${searchParams.get("searchTerm")}`),
+            );
             setBrand("");
             setSize("");
           }}
