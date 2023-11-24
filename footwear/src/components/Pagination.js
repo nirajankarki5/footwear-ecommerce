@@ -1,6 +1,11 @@
 import React from "react";
 
-function Pagination({ totalProducts, productsPerPage, setCurrentPage }) {
+function Pagination({
+  totalProducts,
+  productsPerPage,
+  setCurrentPage,
+  currentPage,
+}) {
   let pages = [];
 
   for (let i = 1; i <= Math.ceil(totalProducts / productsPerPage); i++) {
@@ -11,7 +16,11 @@ function Pagination({ totalProducts, productsPerPage, setCurrentPage }) {
       {pages.map((page, index) => {
         return (
           <button
-            className="mr-2 h-10 w-10 rounded-full bg-gray-800 text-white "
+            className={`mr-2 h-10 w-10 rounded-full  ${
+              page === currentPage
+                ? "bg-gray-400 text-white"
+                : "bg-gray-800 text-white"
+            }`}
             key={index}
             onClick={() => setCurrentPage(page)}
           >

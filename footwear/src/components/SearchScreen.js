@@ -44,6 +44,7 @@ function SearchScreen() {
         totalProducts={products.length}
         productsPerPage={productsPerPage}
         setCurrentPage={setCurrentPage}
+        currentPage={currentPage}
       />
     </section>
   );

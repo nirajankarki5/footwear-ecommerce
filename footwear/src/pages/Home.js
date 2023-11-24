@@ -34,6 +34,7 @@ function Home() {
           </p>
         )}
 
+        {/* Display only 15 items on homepage. So product.slice(0,15) */}
         {!isLoading && products.length > 0 && (
           <div className="mx-auto mb-20 grid w-[85%] gap-5 sm:w-[95%] sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
             {products.slice(0, 15).map((product) => (
