@@ -6,7 +6,7 @@ function AuthLayout() {
 
   return (
     <div className="flex h-screen w-screen items-center justify-center bg-stone-200 font-body">
-      <div className="grid h-[85%] w-[85%] grid-rows-[2fr_3fr] bg-white sm:h-[80%] sm:w-[70%] lg:grid-cols-[2fr_3fr] lg:grid-rows-none">
+      <div className="grid h-[90%] w-[90%] grid-rows-[2fr_3fr] bg-white sm:h-[85%] sm:w-[75%] lg:grid-cols-[2fr_3fr] lg:grid-rows-none">
         <section className="items-center py-10 text-center sm:py-14 md:py-20 lg:py-44">
           <Link
             to={"/"}
