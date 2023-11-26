@@ -11,6 +11,8 @@ function UserDetails() {
     window.location.reload(false);
   };
 
+  // CHECK IF USER IS LOGGED IN ELSE RETURN "PLEASE LOGIN TO CONTINUE"
+
   return (
     <div className="grid h-full grid-rows-[1fr_1px_3fr] gap-8 px-5 py-4 md:grid-cols-[1fr_1px_3fr] md:grid-rows-none lg:px-10">
       <section className="mx-auto mt-5 flex h-40 w-40 items-center justify-center rounded-full bg-gray-300 lg:h-52 lg:w-52">
@@ -22,7 +24,7 @@ function UserDetails() {
           My Details
         </h1>
 
-        <aside className="my-5 grid w-2/3 grid-cols-2 justify-start gap-2 text-xl">
+        <aside className="my-5 grid w-2/3 grid-cols-2 justify-start gap-2 text-lg">
           <section className="font-medium">
             <p className="my-2">Email:</p>
             <p className="my-2">Created At:</p>
@@ -34,7 +36,7 @@ function UserDetails() {
 
           <button
             onClick={logout}
-            className="my-5 w-40 rounded-full border-none bg-stone-900 px-6 py-4 text-lg text-gray-200 sm:w-2/3 lg:text-xl"
+            className="my-5 rounded-full bg-stone-800 py-4 text-gray-100 md:w-32"
           >
             Logout
           </button>
