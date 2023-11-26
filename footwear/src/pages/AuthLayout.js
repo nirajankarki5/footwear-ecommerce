@@ -6,7 +6,7 @@ function AuthLayout() {
 
   return (
     <div className="flex h-screen w-screen items-center justify-center bg-stone-200 font-body">
-      <div className="grid h-[90%] w-[90%] grid-rows-[2fr_3fr] bg-white sm:h-[85%] sm:w-[75%] lg:grid-cols-[2fr_3fr] lg:grid-rows-none">
+      <div className="grid h-[90%] w-[90%] grid-rows-[2fr_5fr] bg-white sm:h-[85%] sm:w-[75%] lg:grid-cols-[2fr_3fr] lg:grid-rows-none">
         <section className="items-center py-10 text-center sm:py-14 md:py-20 lg:py-44">
           <Link
             to={"/"}
@@ -19,7 +19,7 @@ function AuthLayout() {
             {location.pathname === "/auth/login" ? "Welcome back" : "Join Us"}
           </h2>
 
-          <p className="px-8 text-justify text-sm leading-4 text-gray-400 sm:text-base md:px-14 md:leading-6 lg:text-lg lg:leading-7 xl:px-20 xl:text-xl xl:leading-9">
+          <p className="px-8 text-justify text-base leading-6 text-gray-400 sm:text-lg md:px-12 lg:leading-7 xl:px-20 xl:text-xl xl:leading-9">
             Footwear was designed and founded in 2023. It's main goal is to
             provide all sorts of products to individuals looking to get a new
             pair of sneakers.
