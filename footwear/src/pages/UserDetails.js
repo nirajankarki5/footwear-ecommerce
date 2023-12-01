@@ -3,11 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { CiUser } from "react-icons/ci";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUser } from "../features/user/userSlice";
+import Loading from "../components/Loading";
 
 function UserDetails() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { isUser } = useSelector((store) => store.user);
+  const { isUser, isLoading, user } = useSelector((store) => store.user);
 
   const logout = () => {
     localStorage.removeItem("token");
@@ -49,29 +50,32 @@ function UserDetails() {
         <CiUser className="text-9xl lg:text-[150px]" />
       </section>
       <div className="border-2"></div>
-      <section className=" md:my-5">
-        <h1 className="text-xl font-semibold md:text-2xl lg:text-3xl">
-          My Details
-        </h1>
+      {isLoading && <Loading />}
+      {!isLoading && (
+        <section className=" md:my-5">
+          <h1 className="text-xl font-semibold md:text-2xl lg:text-3xl">
+            My Details
+          </h1>
 
-        <aside className="my-5 grid w-2/3 grid-cols-2 justify-start gap-2 text-lg">
-          <section className="font-medium">
-            <p className="my-2">Email:</p>
-            <p className="my-2">Created At:</p>
-          </section>
-          <section>
-            <p className="my-2">email</p>
-            <p className="my-2">created at</p>
-          </section>
+          <aside className="my-5 grid w-2/3 grid-cols-2 justify-start gap-2 text-lg">
+            <section className="font-medium">
+              <p className="my-2">Email:</p>
+              <p className="my-2">Created At:</p>
+            </section>
+            <section>
+              <p className="my-2">{user.email}</p>
+              <p className="my-2">{user.createdAt}</p>
+            </section>
 
-          <button
-            onClick={logout}
-            className="my-5 rounded-full bg-stone-800 py-4 text-gray-100 md:w-32"
-          >
-            Logout
-          </button>
-        </aside>
-      </section>
+            <button
+              onClick={logout}
+              className="my-5 rounded-full bg-stone-800 py-4 text-gray-100 md:w-32"
+            >
+              Logout
+            </button>
+          </aside>
+        </section>
+      )}
     </div>
   );
 }

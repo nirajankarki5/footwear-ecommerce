@@ -9,6 +9,7 @@ const initialState = {
   networkError: "",
 };
 
+// fetch user details (token required)
 export const fetchUser = createAsyncThunk("user/fetchUser", async (token) => {
   try {
     const response = await fetch(baseUrl + "/myaccount", {
