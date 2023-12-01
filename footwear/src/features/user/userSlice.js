@@ -1,12 +1,28 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const baseUrl = "http://localhost:5000/api/user";
 
 const initialState = {
   isLoading: false,
   isUser: false,
+  user: {},
   networkError: "",
 };
+
+export const fetchUser = createAsyncThunk("user/fetchUser", async (token) => {
+  try {
+    const response = await fetch(baseUrl + "/myaccount", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+    return {};
+  }
+});
 
 const userSlice = createSlice({
   name: "user",
@@ -20,14 +36,23 @@ const userSlice = createSlice({
       // save token to local storage
       localStorage.setItem("token", JSON.stringify(action.payload));
     },
-    // signup(state, action) {
-    //   console.log("SIGNUP SUCCESS");
-    // },
     setLoading(state, action) {
       state.isLoading = action.payload;
     },
     setNetworkError(state, action) {
       state.networkError = action.payload;
+    },
+  },
+  extraReducers: {
+    [fetchUser.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [fetchUser.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.user = action.payload;
+    },
+    [fetchUser.rejected]: (state) => {
+      state.isLoading = false;
     },
   },
 });

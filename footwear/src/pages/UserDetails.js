@@ -1,9 +1,13 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { CiUser } from "react-icons/ci";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUser } from "../features/user/userSlice";
 
 function UserDetails() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { isUser } = useSelector((store) => store.user);
 
   const logout = () => {
     localStorage.removeItem("token");
@@ -11,7 +15,33 @@ function UserDetails() {
     window.location.reload(false);
   };
 
+  useEffect(() => {
+    const tokenString = localStorage.getItem("token");
+    if (tokenString) {
+      dispatch(fetchUser(JSON.parse(tokenString)));
+    }
+  }, [dispatch]);
+
   // CHECK IF USER IS LOGGED IN ELSE RETURN "PLEASE LOGIN TO CONTINUE"
+  if (!isUser) {
+    return (
+      <section className="my-10 text-center sm:my-14 lg:my-20">
+        <h1 className=" text-3xl font-medium md:text-4xl lg:text-5xl">
+          Unauthorized
+        </h1>
+        <p className="my-3 leading-6 text-gray-400 md:my-4 md:text-lg lg:my-5 lg:text-xl">
+          Please login to continue
+          <br />
+          <Link
+            to={"/auth/login"}
+            className="mt-5 inline-block text-blue-600 underline"
+          >
+            Login
+          </Link>
+        </p>
+      </section>
+    );
+  }
 
   return (
     <div className="grid h-full grid-rows-[1fr_1px_3fr] gap-8 px-5 py-4 md:grid-cols-[1fr_1px_3fr] md:grid-rows-none lg:px-10">
