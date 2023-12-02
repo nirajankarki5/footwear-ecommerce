@@ -35,7 +35,7 @@ function Navbar() {
   }, [dispatch]);
 
   return (
-    <nav className="flex h-20 items-center justify-between border-y-2 px-5 py-4 font-body lg:px-10">
+    <nav className="flex h-20 items-center justify-between border-y-2 px-5 py-4 lg:px-10">
       <Link
         to="/"
         onClick={() => {
