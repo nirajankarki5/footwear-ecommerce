@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { CiImageOn } from "react-icons/ci";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
@@ -7,11 +7,15 @@ import { FaStar } from "react-icons/fa";
 
 function SingleProduct() {
   const { id } = useParams();
-  console.log(id);
+  // console.log(id);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="grid grid-rows-2 gap-5 px-5 py-4 md:grid-cols-2 md:grid-rows-none lg:px-10 xl:gap-10">
-      <section className="rounded-lg bg-gray-300 md:my-2 lg:rounded-3xl">
+      <section className="rounded-lg bg-stone-200 md:my-2 lg:rounded-3xl">
         <CiImageOn className="mx-auto h-96 text-[10rem] md:h-[80vh] lg:text-[15rem]" />
       </section>
       <section className="p-3 lg:p-8">
@@ -36,7 +40,10 @@ function SingleProduct() {
         <div className="mb-10 flex flex-wrap gap-2 md:mb-16">
           {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((size) => {
             return (
-              <div className="flex h-20 w-20 cursor-pointer items-center justify-center border-2 border-gray-400 text-lg md:text-xl">
+              <div
+                key={size}
+                className="flex h-20 w-20 cursor-pointer items-center justify-center border-2 border-gray-400 text-lg md:text-xl"
+              >
                 {size}
               </div>
             );
