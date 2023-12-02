@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { CiImageOn } from "react-icons/ci";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
@@ -7,6 +7,7 @@ import { FaStar } from "react-icons/fa";
 
 function SingleProduct() {
   const { id } = useParams();
+  const [size, setSize] = useState(null);
   // console.log(id);
 
   useEffect(() => {
@@ -38,13 +39,16 @@ function SingleProduct() {
           Available Sizes:
         </p>
         <div className="mb-10 flex flex-wrap gap-2 md:mb-16">
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((size) => {
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item) => {
             return (
               <div
-                key={size}
-                className="flex h-20 w-20 cursor-pointer items-center justify-center border-2 border-gray-400 text-lg md:text-xl"
+                key={item}
+                onClick={() => setSize(item)}
+                className={`${
+                  size === item ? "bg-green-500" : ""
+                } flex h-20 w-20 cursor-pointer items-center justify-center border-2 border-gray-400 text-lg md:text-xl`}
               >
-                {size}
+                {item}
               </div>
             );
           })}
