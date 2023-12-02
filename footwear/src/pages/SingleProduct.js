@@ -15,8 +15,8 @@ function SingleProduct() {
 
   return (
     <div className="grid grid-rows-2 gap-5 px-5 py-4 md:grid-cols-2 md:grid-rows-none lg:px-10 xl:gap-10">
-      <section className="rounded-lg bg-stone-200 md:my-2 lg:rounded-3xl">
-        <CiImageOn className="mx-auto h-96 text-[10rem] md:h-[80vh] lg:text-[15rem]" />
+      <section className="flex items-center justify-center rounded-lg bg-stone-200 md:my-2 lg:rounded-3xl">
+        <CiImageOn className="mx-auto text-[10rem]" />
       </section>
       <section className="p-3 lg:p-8">
         <h1 className="mb-2 text-2xl font-semibold md:mb-3 md:text-3xl lg:text-4xl">
@@ -55,7 +55,7 @@ function SingleProduct() {
           <p>Add to cart</p>
         </button>
 
-        <div className="flex items-center gap-2 text-lg font-medium md:tracking-wide">
+        <div className="flex items-center gap-2 font-medium md:text-lg md:tracking-wide">
           <LuTruck className="text-xl" />
           <p>Free delivery on orders over $30.0</p>
         </div>
