@@ -44,17 +44,19 @@ const userSlice = createSlice({
       state.networkError = action.payload;
     },
   },
-  extraReducers: {
-    [fetchUser.pending]: (state) => {
-      state.isLoading = true;
-    },
-    [fetchUser.fulfilled]: (state, action) => {
-      state.isLoading = false;
-      state.user = action.payload;
-    },
-    [fetchUser.rejected]: (state) => {
-      state.isLoading = false;
-    },
+
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchUser.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchUser.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.user = action.payload;
+      })
+      .addCase(fetchUser.rejected, (state) => {
+        state.isLoading = false;
+      });
   },
 });
 

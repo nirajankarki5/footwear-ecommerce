@@ -37,17 +37,30 @@ const productSlice = createSlice({
     //   state.productSearchTerm = action.payload;
     // },
   },
-  extraReducers: {
-    [fetchProducts.pending]: (state) => {
-      state.isLoading = true;
-    },
-    [fetchProducts.fulfilled]: (state, action) => {
-      state.isLoading = false;
-      state.products = action.payload;
-    },
-    [fetchProducts.rejected]: (state) => {
-      state.isLoading = false;
-    },
+  // extraReducers: {
+  //   [fetchProducts.pending]: (state) => {
+  //     state.isLoading = true;
+  //   },
+  //   [fetchProducts.fulfilled]: (state, action) => {
+  //     state.isLoading = false;
+  //     state.products = action.payload;
+  //   },
+  //   [fetchProducts.rejected]: (state) => {
+  //     state.isLoading = false;
+  //   },
+  // },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchProducts.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchProducts.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.products = action.payload;
+      })
+      .addCase(fetchProducts.rejected, (state, action) => {
+        state.isLoading = false;
+      });
   },
 });
 
