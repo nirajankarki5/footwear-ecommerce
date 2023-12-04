@@ -14,7 +14,7 @@ function Login() {
 
   const navigate = useNavigate();
   const location = useLocation();
-
+  // go to previous (protected) route that user wanted to go. Else, go to homepage
   const from = location.state?.from?.pathname || "/";
 
   const handleSubmit = async (e) => {
@@ -25,7 +25,7 @@ function Login() {
     }
 
     const status = await dispatch(login({ email, password }));
-    // navigate to home if login success
+    // navigate to specific route if login success
     if (status === "success") {
       navigate(from, { replace: true });
     }
