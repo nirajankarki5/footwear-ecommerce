@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { CiUser } from "react-icons/ci";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUser } from "../features/user/userSlice";
@@ -7,6 +7,7 @@ import Loading from "../components/Loading";
 
 function UserDetails() {
   const navigate = useNavigate();
+  const location = useLocation();
   const dispatch = useDispatch();
   const { isUser, isLoading, user } = useSelector((store) => store.user);
 
@@ -24,24 +25,31 @@ function UserDetails() {
   }, [dispatch]);
 
   // CHECK IF USER IS LOGGED IN ELSE RETURN "PLEASE LOGIN TO CONTINUE"
+  // if (!isUser) {
+  //   return (
+  //     <section className="my-10 text-center sm:my-14 lg:my-20">
+  //       <h1 className=" text-3xl font-medium md:text-4xl lg:text-5xl">
+  //         Unauthorized
+  //       </h1>
+  //       <p className="my-3 leading-6 text-gray-400 md:my-4 md:text-lg lg:my-5 lg:text-xl">
+  //         Please login to continue
+  //         <br />
+  //         <Link
+  //           to={"/auth/login"}
+  //           className="mt-5 inline-block text-blue-600 underline"
+  //         >
+  //           Login
+  //         </Link>
+  //       </p>
+  //     </section>
+  //   );
+  // }
+
+  // Check if user is logged in. If not, navigate to login page
+  // if user wants to go to a protected route without logging in, navigates to login page.
+  // and after logging in, it redirects to that protected route that user previously wanted to go
   if (!isUser) {
-    return (
-      <section className="my-10 text-center sm:my-14 lg:my-20">
-        <h1 className=" text-3xl font-medium md:text-4xl lg:text-5xl">
-          Unauthorized
-        </h1>
-        <p className="my-3 leading-6 text-gray-400 md:my-4 md:text-lg lg:my-5 lg:text-xl">
-          Please login to continue
-          <br />
-          <Link
-            to={"/auth/login"}
-            className="mt-5 inline-block text-blue-600 underline"
-          >
-            Login
-          </Link>
-        </p>
-      </section>
-    );
+    return <Navigate to="/auth/login" state={{ from: location }} replace />;
   }
 
   return (

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import loginImg from "../assets/images/login.jpg";
 import TextField from "../ui/TextField";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login, setNetworkError } from "../features/user/userSlice";
 
@@ -13,6 +13,9 @@ function Login() {
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,7 +27,7 @@ function Login() {
     const status = await dispatch(login({ email, password }));
     // navigate to home if login success
     if (status === "success") {
-      navigate("/");
+      navigate(from, { replace: true });
     }
   };
 
