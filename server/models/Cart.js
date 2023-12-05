@@ -3,7 +3,7 @@ const Product = require("./Product");
 
 const CartSchema = new mongoose.Schema(
   {
-    user: {
+    userId: {
       type: String,
       required: [true, "Must provide user id"],
     },

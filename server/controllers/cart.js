@@ -7,6 +7,9 @@ const getAllCartItems = async (req, res) => {
 
 const getUserCartItems = async (req, res) => {
   const { id: userId } = req.user;
+
+  const userCartItems = await Cart.find({ userId: userId });
+  res.status(200).json(userCartItems);
 };
 
 module.exports = { getAllCartItems, getUserCartItems };
