@@ -7,6 +7,7 @@ const connectDB = require("./db/connect");
 // Router
 const productsRoute = require("./routes/products");
 const userRoute = require("./routes/user");
+const cartRouter = require("./routes/cart");
 
 const notFound = require("./middleware/not-found");
 const errorHandler = require("./middleware/error-handler");
@@ -22,6 +23,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use("/api/products", productsRoute);
 app.use("/api/user", userRoute);
+app.use("/api/cart", cartRouter);
 
 app.use(notFound);
 app.use(errorHandler);
