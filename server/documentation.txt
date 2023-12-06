@@ -28,4 +28,9 @@ signup: http://localhost:5000/api/user/signup
 get user: http://localhost:5000/api/user/myaccount
 // need to pass token in header. Authorization: Bearer $token
 login: http://localhost:5000/api/user/login
-logout: http://localhost:5000/api/uesr/logout
+logout: http://localhost:5000/api/user/logout
+
+CART:
+get all cart: http://localhost:5000/api/cart
+get user cart items: http://localhost:5000/api/cart/userCart
+update user cart items (POST): http://localhost:5000/api/cart/userCart
