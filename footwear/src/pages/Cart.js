@@ -31,8 +31,8 @@ function Cart() {
           <div className="md:mx-20 lg:mx-auto lg:max-w-4xl">
             <section className="mb-5 grid grid-cols-[5fr_1fr_1fr] gap-4 pt-4 text-lg text-gray-400">
               <h2>ITEM</h2>
-              <h2>QUANTITY</h2>
-              <h2>PRICE</h2>
+              <h2 className="justify-self-center">QUANTITY</h2>
+              <h2 className="justify-self-center">PRICE</h2>
             </section>
 
             {cart?.map((item) => {
