@@ -5,13 +5,28 @@ const baseUrl = "http://localhost:5000/api/cart";
 const initialState = {
   isLoading: false,
   cart: [],
+  networkError: null,
 };
 
 export const fetchUserCart = createAsyncThunk(
   "cart/fetchUserCart",
-  async (url) => {
+  //   if we use thunkAPI, it we can only use one parameter
+  //   thunkAPI is used to use dispatch
+  async ({ url, token }, thunkAPI) => {
     try {
-      const response = await fetch(baseUrl + url);
+      const response = await fetch(baseUrl + url, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.status === 500) {
+        thunkAPI.dispatch({
+          type: "cart/setNetworkError",
+          payload: "Something went wrong",
+        });
+      }
+
       const data = await response.json();
       return data.products;
     } catch (error) {
@@ -24,7 +39,12 @@ export const fetchUserCart = createAsyncThunk(
 const cartSlice = createSlice({
   name: "cart",
   initialState,
-  reducers: {},
+  reducers: {
+    setNetworkError(state, action) {
+      state.isLoading = false;
+      state.networkError = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchUserCart.pending, (state) => {
@@ -40,4 +60,5 @@ const cartSlice = createSlice({
   },
 });
 
+export const { setNetworkError } = cartSlice.actions;
 export default cartSlice.reducer;
