@@ -1,12 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserCart } from "../features/cart/cartSlice";
 import Loading from "../components/Loading";
 import CartItem from "../components/CartItem";
 
 function Cart() {
+  const [totalPrice, setTotalPrice] = useState(0);
   const { isLoading, cart, networkError } = useSelector((store) => store.cart);
   const dispatch = useDispatch();
+
+  const calculateTotalPrice = useCallback(() => {
+    let sum = 0;
+    cart.forEach((each) => (sum += each.quantity * each.price));
+    setTotalPrice(sum);
+  }, [cart]);
 
   useEffect(() => {
     const tokenString = localStorage.getItem("token");
@@ -14,6 +21,10 @@ function Cart() {
       fetchUserCart({ url: "/userCart", token: JSON.parse(tokenString) }),
     );
   }, [dispatch]);
+
+  useEffect(() => {
+    calculateTotalPrice();
+  }, [calculateTotalPrice]);
 
   return (
     <>
@@ -38,6 +49,17 @@ function Cart() {
             {cart?.map((item) => {
               return <CartItem key={item.productId} {...item} />;
             })}
+
+            <h2 className="flex justify-between text-xl font-medium md:text-2xl lg:text-3xl">
+              <p>Total Price:</p>
+              <p>${totalPrice}</p>
+            </h2>
+          </div>
+
+          <div className="my-5 text-center lg:my-10">
+            <button className="border-2 border-red-500 px-10 py-3 text-red-500 lg:px-16 lg:text-lg">
+              Clear Cart
+            </button>
           </div>
         </div>
       )}
