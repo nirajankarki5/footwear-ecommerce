@@ -50,16 +50,17 @@ function Cart() {
               return <CartItem key={item.productId} {...item} />;
             })}
 
-            <h2 className="flex justify-between text-xl font-medium md:text-2xl lg:text-3xl">
+            <h2 className="my-8 flex justify-between text-xl font-medium md:text-2xl lg:text-3xl">
               <p>Total Price:</p>
               <p>${totalPrice}</p>
             </h2>
-          </div>
 
-          <div className="my-5 text-center lg:my-10">
-            <button className="border-2 border-red-500 px-10 py-3 text-red-500 lg:px-16 lg:text-lg">
-              Clear Cart
-            </button>
+            <div className="my-5 grid grid-cols-2 gap-1 text-center text-lg lg:my-10 lg:text-xl">
+              <button className="bg-gray-900 text-gray-200">Checkout</button>
+              <button className="border-2 border-red-500 px-10 py-3 text-red-500 lg:px-16 lg:py-5 lg:text-lg">
+                Clear Cart
+              </button>
+            </div>
           </div>
         </div>
       )}
