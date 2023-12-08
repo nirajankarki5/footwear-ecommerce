@@ -91,10 +91,10 @@ export function addToCart({ productDetails, token }) {
   };
 }
 
-export function deleteCart({ id, token }) {
+export function deleteCart({ url, token }) {
   return async (dispatch, getState) => {
     try {
-      const response = await fetch(baseUrl + "/userCart/" + id, {
+      const response = await fetch(baseUrl + url, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,

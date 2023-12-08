@@ -1,6 +1,10 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUserCart, setNetworkError } from "../features/cart/cartSlice";
+import {
+  deleteCart,
+  fetchUserCart,
+  setNetworkError,
+} from "../features/cart/cartSlice";
 import Loading from "../components/Loading";
 import CartItem from "../components/CartItem";
 
@@ -15,6 +19,24 @@ function Cart() {
     cart?.forEach((each) => (sum += each.quantity * each.price));
     setTotalPrice(sum);
   }, [cart]);
+
+  // delete individual items or clear whole cart based on url(api)
+  const deleteCartItem = async (url) => {
+    const tokenString = localStorage.getItem("token");
+    const data = await dispatch(
+      deleteCart({
+        url: url,
+        token: JSON.parse(tokenString),
+      }),
+    );
+
+    if (data === "success") {
+      // fetch cart again after deleting items
+      dispatch(
+        fetchUserCart({ url: "/userCart", token: JSON.parse(tokenString) }),
+      );
+    }
+  };
 
   useEffect(() => {
     const tokenString = localStorage.getItem("token");
@@ -58,7 +80,13 @@ function Cart() {
             </section>
 
             {cart?.map((item) => {
-              return <CartItem key={item.productId} {...item} />;
+              return (
+                <CartItem
+                  deleteCartItem={deleteCartItem}
+                  key={item.productId}
+                  {...item}
+                />
+              );
             })}
 
             <h2 className="my-8 flex justify-between text-xl font-medium md:text-2xl lg:text-3xl">
@@ -68,7 +96,10 @@ function Cart() {
 
             <div className="my-5 grid grid-cols-2 gap-1 text-center text-lg lg:my-10 lg:text-xl">
               <button className="bg-gray-900 text-gray-200">Checkout</button>
-              <button className="border-2 border-red-500 px-10 py-3 text-red-500 lg:px-16 lg:py-5 lg:text-lg">
+              <button
+                onClick={() => deleteCartItem("/deleteCart")}
+                className="border-2 border-red-500 px-10 py-3 text-red-500 lg:px-16 lg:py-5 lg:text-lg"
+              >
                 Clear Cart
               </button>
             </div>
