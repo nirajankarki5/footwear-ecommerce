@@ -59,6 +59,14 @@ function Cart() {
     );
   }
 
+  if (cart.length === 0) {
+    return (
+      <h1 className="my-20 text-center text-4xl font-medium">
+        Your cart is empty
+      </h1>
+    );
+  }
+
   return (
     <>
       {isLoading && <Loading />}
