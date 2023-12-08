@@ -1,22 +1,25 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUserCart } from "../features/cart/cartSlice";
+import { fetchUserCart, setNetworkError } from "../features/cart/cartSlice";
 import Loading from "../components/Loading";
 import CartItem from "../components/CartItem";
 
 function Cart() {
   const [totalPrice, setTotalPrice] = useState(0);
+  const { isUser } = useSelector((store) => store.user);
   const { isLoading, cart, networkError } = useSelector((store) => store.cart);
   const dispatch = useDispatch();
 
   const calculateTotalPrice = useCallback(() => {
     let sum = 0;
-    cart.forEach((each) => (sum += each.quantity * each.price));
+    cart?.forEach((each) => (sum += each.quantity * each.price));
     setTotalPrice(sum);
   }, [cart]);
 
   useEffect(() => {
     const tokenString = localStorage.getItem("token");
+    // reset network error to null
+    dispatch(setNetworkError(null));
     dispatch(
       fetchUserCart({ url: "/userCart", token: JSON.parse(tokenString) }),
     );
@@ -25,6 +28,14 @@ function Cart() {
   useEffect(() => {
     calculateTotalPrice();
   }, [calculateTotalPrice]);
+
+  if (!isUser) {
+    return (
+      <p className="my-10 text-center text-xl text-gray-400">
+        Please login to continue
+      </p>
+    );
+  }
 
   return (
     <>
