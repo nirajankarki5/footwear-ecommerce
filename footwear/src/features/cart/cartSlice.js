@@ -91,4 +91,23 @@ export function addToCart({ productDetails, token }) {
   };
 }
 
+export function deleteCart({ id, token }) {
+  return async (dispatch, getState) => {
+    try {
+      const response = await fetch(baseUrl + "/userCart/" + id, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = await response.json();
+      console.log(data);
+      return "success";
+    } catch (error) {
+      console.log(error);
+      return;
+    }
+  };
+}
+
 export default cartSlice.reducer;
