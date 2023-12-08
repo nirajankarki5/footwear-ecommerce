@@ -82,9 +82,19 @@ const deleteCartItems = async (req, res) => {
   res.status(200).json(cart);
 };
 
+const deleteAllCart = async (req, res) => {
+  const { id: userId } = req.user;
+
+  let cart = await Cart.findOne({ userId });
+  cart.products = [];
+  cart = await cart.save();
+  res.status(200).json(cart);
+};
+
 module.exports = {
   getAllCartItems,
   getUserCartItems,
   updateCart,
   deleteCartItems,
+  deleteAllCart,
 };

@@ -34,3 +34,5 @@ CART:
 get all cart: http://localhost:5000/api/cart
 get user cart items: http://localhost:5000/api/cart/userCart
 update user cart items (POST): http://localhost:5000/api/cart/userCart
+delete cart items: http://localhost:5000/api/cart/userCart/655fc1a3525b53e3f7cfedfe
+delete all cart items: http://localhost:5000/api/cart/deleteCart
