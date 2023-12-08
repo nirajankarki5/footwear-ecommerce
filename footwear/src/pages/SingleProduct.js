@@ -7,16 +7,39 @@ import { LuTruck } from "react-icons/lu";
 import { FaStar } from "react-icons/fa";
 import Loading from "../components/Loading";
 import { fetchSingleProduct } from "../features/product/productSlice";
+import { addToCart } from "../features/cart/cartSlice";
 
 function SingleProduct() {
   const { id } = useParams();
   const { isLoading, singleProduct } = useSelector((store) => store.product);
+  const { isUser } = useSelector((store) => store.user);
+  const { isLoading: cartLoading } = useSelector((store) => store.cart);
   const dispatch = useDispatch();
   const [size, setSize] = useState(null);
   // console.log(id);
 
+  const addToCartHandler = () => {
+    if (!isUser) {
+      console.log("Not Logged in");
+      return;
+    }
+
+    if (!size) {
+      console.log("Size not provided");
+      return;
+    }
+    const tokenString = localStorage.getItem("token");
+    dispatch(
+      addToCart({
+        productDetails: { id, size: Number(size), quantity: 1 },
+        token: JSON.parse(tokenString),
+      }),
+    );
+  };
+
   useEffect(() => {
     window.scrollTo(0, 0);
+    setSize(null);
     dispatch(fetchSingleProduct("/" + id));
   }, [dispatch, id]);
 
@@ -71,9 +94,14 @@ function SingleProduct() {
           })}
         </div>
 
-        <button className="mb-3 flex items-center gap-4 rounded-2xl bg-gray-900 px-10 py-5 text-xl text-gray-200 md:mb-5 lg:px-20">
+        <button
+          onClick={addToCartHandler}
+          className="mb-3 flex items-center gap-4 rounded-2xl bg-gray-900 px-10 py-5 text-xl text-gray-200 md:mb-5 lg:px-20"
+        >
           <HiOutlineShoppingBag className="text-2xl" />
-          <p>Add to cart</p>
+          <p className={cartLoading ? "text-gray-400" : ""}>
+            {cartLoading ? "Please wait..." : "Add to cart"}
+          </p>
         </button>
 
         <div className="flex items-center gap-2 font-medium md:text-lg md:tracking-wide">

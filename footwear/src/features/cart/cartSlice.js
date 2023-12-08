@@ -40,6 +40,10 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
+    setLoading(state, action) {
+      state.isLoading = action.payload;
+    },
+
     setNetworkError(state, action) {
       state.isLoading = false;
       state.networkError = action.payload;
@@ -61,4 +65,30 @@ const cartSlice = createSlice({
 });
 
 export const { setNetworkError } = cartSlice.actions;
+
+export function addToCart({ productDetails, token }) {
+  return async (dispatch, getState) => {
+    try {
+      console.log(productDetails);
+      dispatch({ type: "cart/setLoading", payload: true });
+      const response = await fetch(baseUrl + "/userCart", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json", // This is required!!!
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(productDetails),
+      });
+      const data = await response.json();
+      console.log(data);
+      dispatch({ type: "cart/setLoading", payload: false });
+      return "success";
+    } catch (error) {
+      console.log();
+      dispatch({ type: "cart/setLoading", payload: false });
+      return;
+    }
+  };
+}
+
 export default cartSlice.reducer;
