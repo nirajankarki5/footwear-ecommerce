@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { IoIosArrowBack } from "react-icons/io";
+import { IoIosArrowForward } from "react-icons/io";
 
 function CartItem({
   productId,
@@ -15,7 +17,7 @@ function CartItem({
       <div className="flex flex-col gap-1">
         <Link
           to={`/products/${productId}`}
-          className="text-lg font-medium md:text-xl xl:text-2xl"
+          className="text-sm font-medium sm:text-lg md:text-xl xl:text-2xl"
         >
           {name}
         </Link>
@@ -32,11 +34,15 @@ function CartItem({
         </div>
       </div>
 
-      <div className="self-center justify-self-center pb-4 lg:text-lg">
-        <p>{quantity}</p>
+      <div className="flex items-center gap-3 self-center justify-self-center pb-4 sm:text-xl md:text-2xl">
+        <IoIosArrowBack className="cursor-pointer" />
+        <p className="flex h-8 w-8 items-center justify-center border-2 border-gray-400 p-3 md:h-12 md:w-12 md:text-xl">
+          {quantity}
+        </p>
+        <IoIosArrowForward className="cursor-pointer" />
       </div>
 
-      <h3 className="self-center justify-self-center pb-4 font-medium lg:text-xl">
+      <h3 className="self-center justify-self-center pb-4 text-sm font-medium sm:text-base md:text-lg lg:text-xl">
         ${price}
       </h3>
     </div>
