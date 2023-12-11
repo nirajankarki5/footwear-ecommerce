@@ -16,7 +16,7 @@ function Cart() {
   const calculateTotalPrice = useCallback(() => {
     let sum = 0;
     cart?.forEach((each) => (sum += each.quantity * each.price));
-    return sum;
+    return sum.toFixed(2);
   }, [cart]);
 
   // delete individual items or clear whole cart based on url(api)

@@ -18,19 +18,21 @@ function CartItem({
   const dispatch = useDispatch();
 
   // const handleUpdateQty = useCallback(() => {
-  //   const tokenString = localStorage.getItem("token");
-  //   dispatch(
-  //     addToCart({
-  //       productDetails: { id: productId, size, quantity: itemQty },
-  //       token: JSON.parse(tokenString),
-  //     }),
-  //   );
+  //   const timeOut = setTimeout(() => {
+  //     const tokenString = localStorage.getItem("token");
+  //     dispatch(
+  //       addToCart({
+  //         productDetails: { id: productId, size, quantity: itemQty },
+  //         token: JSON.parse(tokenString),
+  //       }),
+  //     );
+  //   }, 2000);
   // }, [dispatch, itemQty, productId, size]);
 
   // Run everytime when the item quantity is changed
   // useEffect(() => {
-  // console.log("UPDATEDDDDD");
-  // const timeOut = setTimeout(() => {
+  //   console.log("UPDATEDDDDD");
+  //   const timeOut = setTimeout(() => {
   // const tokenString = localStorage.getItem("token");
   // dispatch(
   //   addToCart({
@@ -39,10 +41,17 @@ function CartItem({
   //   }),
   // );
   // }, 2000);
-  // handleUpdateQty();
 
-  // return () => clearTimeout(timeOut);
-  // }, [itemQty]);
+  //   return () => clearTimeout(timeOut);
+  // }, [itemQty, dispatch, addToCart, productId, size]);
+
+  useEffect(() => {
+    const timeOut = setTimeout(() => {
+      console.log({ id: productId, size, quantity: itemQty });
+    }, 2000);
+
+    return () => clearTimeout(timeOut);
+  }, [itemQty]);
 
   return (
     <div className="mb-5 grid grid-cols-[5fr_1fr_1fr] gap-4 border-b-2 pb-2 md:mb-8 md:pb-4">
