@@ -84,7 +84,7 @@ export function addToCart({ productDetails, token }) {
       dispatch({ type: "cart/setLoading", payload: false });
       return "success";
     } catch (error) {
-      console.log();
+      console.log(error);
       dispatch({ type: "cart/setLoading", payload: false });
       return;
     }
