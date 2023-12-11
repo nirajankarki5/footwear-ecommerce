@@ -43,7 +43,9 @@ const cartSlice = createSlice({
     setLoading(state, action) {
       state.isLoading = action.payload;
     },
-
+    setCart(state, action) {
+      state.cart = action.payload;
+    },
     setNetworkError(state, action) {
       state.isLoading = false;
       state.networkError = action.payload;
@@ -64,7 +66,7 @@ const cartSlice = createSlice({
   },
 });
 
-export const { setNetworkError } = cartSlice.actions;
+export const { setNetworkError, setCart } = cartSlice.actions;
 
 export function addToCart({ productDetails, token }) {
   return async (dispatch, getState) => {
