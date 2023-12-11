@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   deleteCart,
@@ -9,7 +9,6 @@ import Loading from "../components/Loading";
 import CartItem from "../components/CartItem";
 
 function Cart() {
-  const [totalPrice, setTotalPrice] = useState(0);
   const { isUser } = useSelector((store) => store.user);
   const { isLoading, cart, networkError } = useSelector((store) => store.cart);
   const dispatch = useDispatch();
@@ -17,7 +16,7 @@ function Cart() {
   const calculateTotalPrice = useCallback(() => {
     let sum = 0;
     cart?.forEach((each) => (sum += each.quantity * each.price));
-    setTotalPrice(sum);
+    return sum;
   }, [cart]);
 
   // delete individual items or clear whole cart based on url(api)
@@ -47,9 +46,9 @@ function Cart() {
     );
   }, [dispatch]);
 
-  useEffect(() => {
-    calculateTotalPrice();
-  }, [calculateTotalPrice]);
+  // useEffect(() => {
+  // calculateTotalPrice();
+  // }, [calculateTotalPrice]);
 
   if (!isUser) {
     return (
@@ -99,7 +98,7 @@ function Cart() {
 
             <h2 className="my-8 flex justify-between text-xl font-medium md:text-2xl lg:text-3xl">
               <p>Total Price:</p>
-              <p>${totalPrice}</p>
+              <p>${calculateTotalPrice()}</p>
             </h2>
 
             <div className="my-5 grid grid-cols-2 gap-1 text-center text-lg lg:my-10 lg:text-xl">
