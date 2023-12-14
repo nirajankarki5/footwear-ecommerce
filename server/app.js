@@ -38,3 +38,6 @@ const start = async () => {
 };
 
 start();
+
+// Export the Express API (for vercel - deployment)
+module.exports = app;
