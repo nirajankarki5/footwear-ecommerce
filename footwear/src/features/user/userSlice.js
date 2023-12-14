@@ -1,7 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { baseUrl } from "../../utils/constants";
 
 // const baseUrl = "http://localhost:5000/api/user";
-const baseUrl = "https://footwear-ecommerce-api.vercel.app/api/user";
+// const baseUrl = "https://footwear-ecommerce-api.vercel.app/api/user";
 
 const initialState = {
   isLoading: false,
@@ -13,7 +14,7 @@ const initialState = {
 // fetch user details (token required)
 export const fetchUser = createAsyncThunk("user/fetchUser", async (token) => {
   try {
-    const response = await fetch(baseUrl + "/myaccount", {
+    const response = await fetch(baseUrl + "user/myaccount", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -66,7 +67,7 @@ export const { setUser, setLoading, setNetworkError } = userSlice.actions;
 export function login({ email, password }) {
   return async (dispatch, getState) => {
     try {
-      const response = await fetch(baseUrl + "/login", {
+      const response = await fetch(baseUrl + "user/login", {
         method: "POST",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify({ email: email, password: password }),
@@ -95,7 +96,7 @@ export function login({ email, password }) {
 export function signup({ email, password }) {
   return async (dispatch, getState) => {
     try {
-      const response = await fetch(baseUrl + "/signup", {
+      const response = await fetch(baseUrl + "user/signup", {
         method: "POST",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify({ email: email, password: password }),

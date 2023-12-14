@@ -1,7 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { baseUrl } from "../../utils/constants";
 
 // const baseUrl = "http://localhost:5000/api/cart";
-const baseUrl = "https://footwear-ecommerce-api.vercel.app/api/cart";
+// const baseUrl = "https://footwear-ecommerce-api.vercel.app/api/cart";
 
 const initialState = {
   isLoading: false,
@@ -15,7 +16,7 @@ export const fetchUserCart = createAsyncThunk(
   //   thunkAPI is used to use dispatch
   async ({ url, token }, thunkAPI) => {
     try {
-      const response = await fetch(baseUrl + url, {
+      const response = await fetch(baseUrl + "cart" + url, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -74,7 +75,7 @@ export function addToCart({ productDetails, token }) {
     try {
       console.log(productDetails);
       dispatch({ type: "cart/setLoading", payload: true });
-      const response = await fetch(baseUrl + "/userCart", {
+      const response = await fetch(baseUrl + "cart/userCart", {
         method: "POST",
         headers: {
           "Content-Type": "application/json", // This is required!!!
@@ -97,7 +98,7 @@ export function addToCart({ productDetails, token }) {
 export function deleteCart({ url, token }) {
   return async (dispatch, getState) => {
     try {
-      const response = await fetch(baseUrl + url, {
+      const response = await fetch(baseUrl + "cart" + url, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,

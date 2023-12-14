@@ -4,6 +4,7 @@ import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 import { useDispatch } from "react-redux";
 import { setCart } from "../features/cart/cartSlice";
+import { baseUrl } from "../utils/constants";
 
 function CartItem({
   productId,
@@ -18,11 +19,11 @@ function CartItem({
   const dispatch = useDispatch();
 
   // const baseUrl = "http://localhost:5000/api/cart";
-  const baseUrl = "https://footwear-ecommerce-api.vercel.app/api/cart";
+  // const baseUrl = "https://footwear-ecommerce-api.vercel.app/api/cart";
 
   const updateQty = useCallback(async () => {
     try {
-      const response = await fetch(baseUrl + "/userCart", {
+      const response = await fetch(baseUrl + "cart/userCart", {
         method: "POST",
         headers: {
           "Content-Type": "application/json", // This is required!!!

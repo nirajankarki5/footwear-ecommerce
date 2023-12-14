@@ -1,7 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { baseUrl } from "../../utils/constants";
 
 // const baseUrl = "http://localhost:5000/api/products";
-const baseUrl = "https://footwear-ecommerce-api.vercel.app/api/products";
+// const baseUrl = "https://footwear-ecommerce-api.vercel.app/api/products";
 
 const initialState = {
   isLoading: false,
@@ -14,7 +15,7 @@ export const fetchProducts = createAsyncThunk(
   "product/fetchProducts",
   async (url) => {
     try {
-      const response = await fetch(baseUrl + url);
+      const response = await fetch(baseUrl + "products" + url);
       const data = await response.json();
       return data;
     } catch (error) {
@@ -28,7 +29,7 @@ export const fetchSingleProduct = createAsyncThunk(
   "product/fetchSingleProduct",
   async (url) => {
     try {
-      const response = await fetch(baseUrl + url);
+      const response = await fetch(baseUrl + "products" + url);
       const data = await response.json();
       return data;
     } catch (error) {
