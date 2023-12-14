@@ -28,10 +28,12 @@ app.use("/api/cart", cartRouter);
 app.use(notFound);
 app.use(errorHandler);
 
+const port = process.env.port || 5000;
+
 const start = async () => {
   try {
     await connectDB(process.env.MONGO_URI);
-    app.listen(5000, console.log("Server is listening at port 5000"));
+    app.listen(port, console.log(`Server is listening at port ${port}`));
   } catch (error) {
     console.log(error);
   }
