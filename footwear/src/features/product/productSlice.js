@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-const baseUrl = "http://localhost:5000/api/products";
+// const baseUrl = "http://localhost:5000/api/products";
+const baseUrl = "https://footwear-ecommerce-api.vercel.app/api/products";
 
 const initialState = {
   isLoading: false,

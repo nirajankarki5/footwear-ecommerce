@@ -17,7 +17,8 @@ function CartItem({
   const [itemQty, setItemQty] = useState(quantity);
   const dispatch = useDispatch();
 
-  const baseUrl = "http://localhost:5000/api/cart";
+  // const baseUrl = "http://localhost:5000/api/cart";
+  const baseUrl = "https://footwear-ecommerce-api.vercel.app/api/cart";
 
   const updateQty = useCallback(async () => {
     try {
