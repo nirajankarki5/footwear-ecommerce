@@ -9,6 +9,9 @@ import Loading from "../components/Loading";
 import { fetchSingleProduct } from "../features/product/productSlice";
 import { addToCart } from "../features/cart/cartSlice";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function SingleProduct() {
   const { id } = useParams();
   const { isLoading, singleProduct } = useSelector((store) => store.product);
@@ -17,6 +20,8 @@ function SingleProduct() {
   const dispatch = useDispatch();
   const [size, setSize] = useState(null);
   // console.log(id);
+
+  const notify = () => toast.success("Item added to cart!");
 
   const addToCartHandler = () => {
     if (!isUser) {
@@ -35,6 +40,7 @@ function SingleProduct() {
         token: JSON.parse(tokenString),
       }),
     );
+    notify();
   };
 
   useEffect(() => {
@@ -109,6 +115,7 @@ function SingleProduct() {
           <p>Free delivery on orders over $30.0</p>
         </div>
       </section>
+      <ToastContainer position="bottom-left" />
     </div>
   );
 }

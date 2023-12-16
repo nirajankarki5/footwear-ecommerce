@@ -7,11 +7,15 @@ import {
 } from "../features/cart/cartSlice";
 import Loading from "../components/Loading";
 import CartItem from "../components/CartItem";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Cart() {
   const { isUser } = useSelector((store) => store.user);
   const { isLoading, cart, networkError } = useSelector((store) => store.cart);
   const dispatch = useDispatch();
+
+  const notify = () => toast.success("Item removed!");
 
   const calculateTotalPrice = useCallback(() => {
     let sum = 0;
@@ -34,6 +38,8 @@ function Cart() {
       dispatch(
         fetchUserCart({ url: "/userCart", token: JSON.parse(tokenString) }),
       );
+      // display alert message
+      notify();
     }
   };
 
@@ -113,6 +119,7 @@ function Cart() {
           </div>
         </div>
       )}
+      <ToastContainer position="bottom-left" />
     </>
   );
 }
