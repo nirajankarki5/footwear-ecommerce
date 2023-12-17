@@ -44,6 +44,7 @@ function Cart() {
   };
 
   useEffect(() => {
+    document.title = "My cart";
     const tokenString = localStorage.getItem("token");
     // reset network error to null
     dispatch(setNetworkError(null));

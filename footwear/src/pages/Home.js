@@ -12,6 +12,7 @@ function Home() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    document.title = "FootWear";
     dispatch(fetchProducts("/"));
   }, [dispatch]);
 

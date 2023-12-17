@@ -47,7 +47,9 @@ function SingleProduct() {
     window.scrollTo(0, 0);
     setSize(null);
     dispatch(fetchSingleProduct("/" + id));
-  }, [dispatch, id]);
+
+    document.title = singleProduct.name;
+  }, [dispatch, id, singleProduct.name]);
 
   if (isLoading) {
     return <Loading />;

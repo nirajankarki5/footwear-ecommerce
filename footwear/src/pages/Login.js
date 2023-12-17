@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import loginImg from "../assets/images/login.jpg";
 import TextField from "../ui/TextField";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -30,6 +30,10 @@ function Login() {
       navigate(from, { replace: true });
     }
   };
+
+  useEffect(() => {
+    document.title = "Login";
+  }, []);
 
   return (
     <section className="relative overflow-hidden bg-black">

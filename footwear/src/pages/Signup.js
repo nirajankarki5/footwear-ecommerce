@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import signupImg from "../assets/images/signup.jpg";
 import TextField from "../ui/TextField";
 import { useNavigate } from "react-router-dom";
@@ -37,6 +37,10 @@ function Signup() {
       }
     }
   };
+
+  useEffect(() => {
+    document.title = "Login";
+  }, []);
 
   return (
     <section className="relative overflow-hidden bg-black">

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { CiUser } from "react-icons/ci";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUser } from "../features/user/userSlice";
@@ -18,6 +18,7 @@ function UserDetails() {
   };
 
   useEffect(() => {
+    document.title = "My details";
     const tokenString = localStorage.getItem("token");
     if (tokenString) {
       dispatch(fetchUser(JSON.parse(tokenString)));
