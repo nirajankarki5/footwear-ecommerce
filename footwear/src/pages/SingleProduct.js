@@ -62,8 +62,12 @@ function SingleProduct() {
   }
   return (
     <div className="grid grid-rows-[auto_1fr] gap-5 px-5 py-4 md:grid-cols-2 md:grid-rows-none lg:px-10 xl:gap-10">
-      <section className="mx-auto flex h-96 w-full items-center justify-center self-start rounded-lg bg-stone-200 md:my-2 md:h-[70vh] lg:rounded-3xl">
-        <CiImageOn className="mx-auto text-[10rem]" />
+      <section className="mx-auto flex h-96 w-full items-center justify-center self-start rounded-lg bg-white shadow-lg md:my-2 md:h-[70vh] lg:rounded-3xl">
+        {singleProduct.image ? (
+          <img src={singleProduct.image} alt={singleProduct.name} />
+        ) : (
+          <CiImageOn className="mx-auto text-[10rem]" />
+        )}
       </section>
       <section className="p-3 lg:p-8">
         <h1 className="mb-2 text-2xl font-semibold md:mb-3 md:text-3xl lg:text-4xl">
