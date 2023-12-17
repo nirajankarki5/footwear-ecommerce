@@ -87,7 +87,7 @@ function Cart() {
           <h1 className="my-5 text-4xl font-medium">Your Shopping Cart</h1>
 
           <div className="md:mx-20 lg:mx-auto lg:max-w-5xl">
-            <section className="mb-5 grid grid-cols-[5fr_1fr_1fr] gap-4 pt-4 text-sm text-gray-400 sm:text-lg">
+            <section className="mb-5 grid grid-cols-[7fr_1fr_1fr] gap-4 pt-4 text-sm text-gray-400 sm:text-lg">
               <h2>ITEM</h2>
               <h2 className="justify-self-center">QUANTITY</h2>
               <h2 className="justify-self-center">PRICE</h2>
