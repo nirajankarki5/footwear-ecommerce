@@ -6,6 +6,7 @@ const products = [
     rating: 4.5,
     brand: "Nike",
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12],
+    image: "https://m.media-amazon.com/images/I/51LLTTw8GJL._AC_SX695_.jpg",
   },
   {
     name: "Nike Air Jordan 4 Retro",
@@ -14,6 +15,7 @@ const products = [
     rating: 4.4,
     brand: "Nike",
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12],
+    image: "https://m.media-amazon.com/images/I/51WdJo6TaoL._AC_SX695_.jpg",
   },
   {
     name: "Nike Dunk Low",
@@ -22,6 +24,7 @@ const products = [
     rating: 4.6,
     brand: "Nike",
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12],
+    image: "https://m.media-amazon.com/images/I/6109VR+1KbL._AC_SX695_.jpg",
   },
   {
     name: "Nike Air Jordan 1 Low",
@@ -30,6 +33,7 @@ const products = [
     rating: 4.7,
     brand: "Nike",
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12],
+    image: "https://m.media-amazon.com/images/I/61XwtO9GzfL._AC_SX695_.jpg",
   },
   {
     name: "Men's UA Charged Pursuit 3 Running Shoes",
@@ -38,6 +42,7 @@ const products = [
     rating: 4.4,
     brand: "Under Armour",
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12],
+    image: "https://m.media-amazon.com/images/I/61Ps2D+ktAL._AC_SY575_.jpg",
   },
   {
     name: "Boys' Grade School UA Charged Rogue 3 Running Shoes",
@@ -46,6 +51,7 @@ const products = [
     rating: 4.3,
     brand: "Under Armour",
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12],
+    image: "https://m.media-amazon.com/images/I/71R779vIZ2L._AC_SX695_.jpg",
   },
   {
     name: "Women's UA Glyde RM Softball Cleats",
@@ -54,6 +60,7 @@ const products = [
     rating: 4.5,
     brand: "Under Armour",
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10],
+    image: "https://m.media-amazon.com/images/I/51k0a5YbBrL._AC_SY695_.jpg",
   },
   {
     name: "Women's UA HOVR™ Turbulence Running Shoes",
@@ -62,6 +69,7 @@ const products = [
     rating: 4.6,
     brand: "Under Armour",
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5],
+    image: "https://m.media-amazon.com/images/I/81jCbSK6kPL._AC_SX695_.jpg",
   },
   {
     name: "Made in USA 990v4",
@@ -70,6 +78,7 @@ const products = [
     rating: 4.7,
     brand: "New Balance",
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12],
+    image: "https://m.media-amazon.com/images/I/71EYGFxxNYL._AC_SX575_.jpg",
   },
   {
     name: "Fresh Foam X Hierro v7",
@@ -78,6 +87,7 @@ const products = [
     rating: 4.7,
     brand: "New Balance",
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12],
+    image: "https://m.media-amazon.com/images/I/71E4x0eEnYL._AC_SY695_.jpg",
   },
   {
     name: "Fresh Foam Garoé",
@@ -86,6 +96,7 @@ const products = [
     rating: 4.8,
     brand: "New Balance",
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12],
+    image: "https://m.media-amazon.com/images/I/51HNLVp-X5L._AC_SY575_.jpg",
   },
   {
     name: "DynaSoft Nitrel V5",
@@ -94,6 +105,7 @@ const products = [
     rating: 4.6,
     brand: "New Balance",
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12],
+    image: "https://m.media-amazon.com/images/I/51mSNB7pwFL._AC_SY695_.jpg",
   },
 ];
 

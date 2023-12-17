@@ -28,6 +28,10 @@ const ProductSchema = new mongoose.Schema({
     type: [String],
     required: [true, "Must provide sizes"],
   },
+  image: {
+    type: String,
+    required: [true, "Must provide image"],
+  },
 });
 
 module.exports = mongoose.model("Product", ProductSchema);
