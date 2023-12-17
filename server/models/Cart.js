@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const Product = require("./Product");
 
 const CartSchema = new mongoose.Schema(
   {
@@ -13,7 +12,7 @@ const CartSchema = new mongoose.Schema(
         {
           productId: String,
           name: String,
-          //   image: String,
+          image: String,
           brand: String,
           quantity: Number,
           price: Number,

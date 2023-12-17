@@ -36,7 +36,7 @@ const updateCart = async (req, res) => {
         cart.products.push({
           productId,
           name: product.name,
-          //   image: product.image,
+          image: product.image,
           brand: product.brand,
           quantity,
           price: product.price,
@@ -54,7 +54,7 @@ const updateCart = async (req, res) => {
           {
             productId,
             name: product.name,
-            //   image: product.image,
+            image: product.image,
             brand: product.brand,
             quantity,
             price: product.price,

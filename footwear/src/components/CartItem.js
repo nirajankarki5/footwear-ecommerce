@@ -13,6 +13,7 @@ function CartItem({
   quantity,
   price,
   size,
+  image,
   deleteCartItem,
 }) {
   const [itemQty, setItemQty] = useState(quantity);
@@ -50,7 +51,10 @@ function CartItem({
   }, [updateQty]);
 
   return (
-    <div className="mb-5 grid grid-cols-[5fr_1fr_1fr] gap-4 border-b-2 pb-2 md:mb-8 md:pb-4">
+    <div className="mb-5 grid grid-cols-[1fr_6fr_1fr_1fr] gap-4 border-b-2 pb-2 md:mb-8 md:pb-4">
+      <div className="w-14 self-center md:w-20">
+        <img src={image} alt={name} />
+      </div>
       <div className="flex flex-col gap-1">
         <Link
           to={`/products/${productId}`}
@@ -58,9 +62,9 @@ function CartItem({
         >
           {name}
         </Link>
-        <p className="text-gray-400 lg:text-lg">{brand}</p>
+        <p className="text-xs text-gray-400 sm:text-base lg:text-lg">{brand}</p>
 
-        <div className="flex items-center gap-5">
+        <div className="flex items-center gap-5 text-sm md:text-base">
           <p className="lg:text-lg">Size: {size}</p>
           <button
             onClick={() => deleteCartItem("/userCart/" + productId)}
@@ -71,7 +75,7 @@ function CartItem({
         </div>
       </div>
 
-      <div className="flex items-center gap-3 self-center justify-self-center pb-4 sm:text-xl md:text-2xl">
+      <div className="flex items-center gap-1 self-center justify-self-center pb-4 sm:gap-3 sm:text-xl md:text-2xl">
         <IoIosArrowBack
           onClick={() => {
             if (itemQty > 1) {
