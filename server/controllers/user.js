@@ -1,5 +1,4 @@
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 const CustomAPIError = require("../errors/custom-error");
 
@@ -16,7 +15,7 @@ const createUser = async (req, res) => {
 
   const user = await User.create({
     email: req.body.email,
-    password: bcrypt.hashSync(req.body.password, 8),
+    password: req.body.password, // password is hashed in User.js using mongoose pre middleware function
   });
 
   res.status(201).json(user);

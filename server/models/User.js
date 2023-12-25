@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 
 const UserSchema = new mongoose.Schema(
   {
@@ -15,6 +16,11 @@ const UserSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+// pre middleware function (runs before saving the document)
+UserSchema.pre("save", async function (next) {
+  this.password = bcrypt.hashSync(this.password, 8);
+});
 
 // mongoose Instance methods (DOCS)
 UserSchema.methods.createJWT = function () {
