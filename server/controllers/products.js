@@ -1,4 +1,5 @@
 const Product = require("../models/Product");
+const CustomAPIError = require("../errors/custom-error");
 
 const getAllProducts = async (req, res) => {
   const { searchTerm, brand, size } = req.query;
@@ -21,7 +22,7 @@ const getAllProducts = async (req, res) => {
 const getProduct = async (req, res) => {
   const product = await Product.findOne({ _id: req.params.id });
   if (!product) {
-    return res.status(404).json({ msg: "No product found" });
+    throw new CustomAPIError("Product not found", 404);
   }
 
   res.status(200).json(product);
@@ -35,7 +36,7 @@ const insertProduct = async (req, res) => {
 const deleteProduct = async (req, res) => {
   const product = await Product.findOneAndDelete({ _id: req.params.id });
   if (!product) {
-    return res.status(404).json({ msg: "No product found" });
+    throw new CustomAPIError("Product not found", 404);
   }
 
   res.status(200).json(product);
@@ -52,7 +53,7 @@ const updateProduct = async (req, res) => {
   );
 
   if (!product) {
-    return res.status(404).json({ msg: "No product found" });
+    throw new CustomAPIError("Product not found", 404);
   }
 
   res.status(200).json(product);
