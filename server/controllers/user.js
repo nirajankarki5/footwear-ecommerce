@@ -4,10 +4,14 @@ const User = require("../models/User");
 const CustomAPIError = require("../errors/custom-error");
 
 const createUser = async (req, res) => {
+  if (!req.body.email || !req.body.password) {
+    throw new CustomAPIError("You must provide email and password", 400);
+  }
+
   // Check if email already exists in database
   const emailExist = await User.findOne({ email: req.body.email });
   if (emailExist) {
-    return res.status(422).json({ msg: "Email already exists" });
+    throw new CustomAPIError("Email already exists", 422);
   }
 
   const user = await User.create({
@@ -15,7 +19,7 @@ const createUser = async (req, res) => {
     password: bcrypt.hashSync(req.body.password, 8),
   });
 
-  res.status(200).json(user);
+  res.status(201).json(user);
 };
 
 const getUser = async (req, res) => {
@@ -45,11 +49,8 @@ const login = async (req, res) => {
     return res.status(401).json({ msg: "Invalid password" });
   }
 
-  const token = jwt.sign(
-    { id: user.id, email: user.email },
-    process.env.JWT_SECRET,
-    { expiresIn: "30d" }
-  );
+  // JWT is generated in User.js model
+  const token = user.createJWT();
 
   //   req.session.token = token;
 
