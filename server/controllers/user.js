@@ -43,9 +43,9 @@ const login = async (req, res) => {
     throw new CustomAPIError("User not found", 404);
   }
 
-  const passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
+  const passwordIsValid = await user.comparePassword(req.body.password);
   if (!passwordIsValid) {
-    return res.status(401).json({ msg: "Invalid password" });
+    throw new CustomAPIError("Invalid password", 401);
   }
 
   // JWT is generated in User.js model
