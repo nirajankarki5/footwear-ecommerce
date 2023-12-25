@@ -25,7 +25,7 @@ const getUser = async (req, res) => {
   console.log(req.user);
   const user = await User.findOne({ _id: req.user.id });
   if (!user) {
-    return res.status(404).json({ msg: "User not found" });
+    throw new CustomAPIError("User not found", 404);
   }
 
   res.status(200).json(user);
@@ -43,7 +43,7 @@ const login = async (req, res) => {
     throw new CustomAPIError("User not found", 404);
   }
 
-  const passwordIsValid = await user.comparePassword(req.body.password);
+  const passwordIsValid = user.comparePassword(req.body.password);
   if (!passwordIsValid) {
     throw new CustomAPIError("Invalid password", 401);
   }

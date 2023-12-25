@@ -3,12 +3,14 @@ require("dotenv").config();
 require("express-async-errors");
 const cors = require("cors");
 
+// Database
 const connectDB = require("./db/connect");
 // Router
 const productsRoute = require("./routes/products");
 const userRoute = require("./routes/user");
 const cartRouter = require("./routes/cart");
 
+// middlewares
 const notFound = require("./middleware/not-found");
 const errorHandler = require("./middleware/error-handler");
 
