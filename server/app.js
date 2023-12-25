@@ -43,11 +43,11 @@ const start = async () => {
 
 start();
 
-// (VERCEL) A Node.js Serverless Function must export a default function handler, for example:
-export default function handler(request, response) {
-  const { name = "World" } = request.query;
-  return response.send(`Hello ${name}!`);
-}
+// // (VERCEL) A Node.js Serverless Function must export a default function handler, for example:
+// export default function handler(request, response) {
+//   const { name = "World" } = request.query;
+//   return response.send(`Hello ${name}!`);
+// }
 
-// Export the Express API (for vercel - deployment)
-module.exports = app;
+// // Export the Express API (for vercel - deployment)
+// module.exports = app;
