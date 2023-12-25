@@ -35,12 +35,12 @@ const login = async (req, res) => {
   //   const { email, password } = req.body;
 
   if (!req.body.email || !req.body.password) {
-    return res.status(400).json({ msg: "You must provide email and password" });
+    throw new CustomAPIError("You must provide email and password", 400);
   }
 
   const user = await User.findOne({ email: req.body.email });
   if (!user) {
-    return res.status(404).json({ msg: "User not found" });
+    throw new CustomAPIError("User not found", 404);
   }
 
   const passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
@@ -50,8 +50,6 @@ const login = async (req, res) => {
 
   // JWT is generated in User.js model
   const token = user.createJWT();
-
-  //   req.session.token = token;
 
   return res.status(200).json({
     id: user.id,
