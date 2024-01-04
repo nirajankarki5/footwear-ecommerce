@@ -21,16 +21,19 @@ function SingleProduct() {
   const [size, setSize] = useState(null);
   // console.log(id);
 
-  const notify = () => toast.success("Item added to cart!");
+  const notifyLogin = () =>
+    toast.error("Please login to add items to the cart!");
+  const notifySize = () => toast.error("Please select size!");
+  const notifyAdd = () => toast.success("Item added to cart!");
 
   const addToCartHandler = () => {
     if (!isUser) {
-      console.log("Not Logged in");
+      notifyLogin();
       return;
     }
 
     if (!size) {
-      console.log("Size not provided");
+      notifySize();
       return;
     }
     const tokenString = localStorage.getItem("token");
@@ -40,7 +43,7 @@ function SingleProduct() {
         token: JSON.parse(tokenString),
       }),
     );
-    notify();
+    notifyAdd();
   };
 
   useEffect(() => {
