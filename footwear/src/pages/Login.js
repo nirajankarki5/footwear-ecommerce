@@ -26,8 +26,10 @@ function Login() {
 
     const status = await dispatch(login({ email, password }));
     // navigate to specific route if login success
-    if (status === "success") {
+    if (status.status === "success" && status.userType === "User") {
       navigate(from, { replace: true });
+    } else if (status.status === "success" && status.userType === "Admin") {
+      navigate("/admindashboard");
     }
   };
 

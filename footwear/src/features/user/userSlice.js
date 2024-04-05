@@ -85,7 +85,7 @@ export function login({ email, password }) {
         });
         return;
       }
-      return "success";
+      return { status: "success", userType: data.userType };
     } catch (error) {
       console.log(error);
       return;

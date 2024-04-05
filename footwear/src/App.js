@@ -10,6 +10,7 @@ import Cart from "./pages/Cart";
 import Signup from "./pages/Signup";
 import SearchProduct from "./pages/SearchProduct";
 import AuthLayout from "./pages/AuthLayout";
+import AdminDashboard from "./pages/AdminDashboard";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />
         </Route>
+        <Route path="/admindashboard" element={<AdminDashboard />} />
       </Routes>
     </BrowserRouter>
   );
