@@ -32,8 +32,13 @@ function Signup() {
     if (status === "success") {
       const loginStatus = await dispatch(login({ email, password }));
       // navigate to home if login success
-      if (loginStatus === "success") {
+      if (loginStatus.status === "success" && loginStatus.userType === "User") {
         navigate("/");
+      } else if (
+        loginStatus.status === "success" &&
+        loginStatus.userType === "Admin"
+      ) {
+        navigate("/admindashboard");
       }
     }
   };
