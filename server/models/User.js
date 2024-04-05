@@ -13,6 +13,15 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: [true, "Must provide password"],
     },
+    userType: {
+      type: String,
+      enum: {
+        values: ["Admin", "User"],
+        message: "{VALUE} is not supported",
+      },
+      required: [true, "must provide user type"],
+      default: "User",
+    },
   },
   { timestamps: true }
 );
