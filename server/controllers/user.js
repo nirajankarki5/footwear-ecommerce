@@ -16,6 +16,7 @@ const createUser = async (req, res) => {
   const user = await User.create({
     email: req.body.email,
     password: req.body.password, // password is hashed in User.js using mongoose pre middleware function
+    userType: req.body.userType,
   });
 
   res.status(201).json(user);
@@ -54,6 +55,7 @@ const login = async (req, res) => {
   return res.status(200).json({
     id: user.id,
     email: user.email,
+    userType: user.userType,
     token: token,
   });
 };
