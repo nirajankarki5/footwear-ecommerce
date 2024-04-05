@@ -1,28 +1,32 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import Loading from "../components/Loading";
-import { fetchUser } from "../features/user/userSlice";
 
 function AdminDashboard() {
-  const { isLoading, user } = useSelector((store) => store.user);
-  const dispatch = useDispatch();
+  const { user, isLoading } = useSelector((store) => store.user);
+  const navigate = useNavigate();
+
+  const [userInfo, setUserInfo] = useState({});
 
   useEffect(() => {
-    document.title = "Dashboard";
-    const tokenString = localStorage.getItem("token");
-    if (tokenString) {
-      dispatch(fetchUser(JSON.parse(tokenString)));
+    if (user.userType === "User") {
+      navigate("/");
     }
-  }, [dispatch]);
+    if (user) {
+      setUserInfo(user);
+    }
+  }, [navigate, user]);
 
-  if (user.userType === "User") {
-    return <h1>Please login as Admin to view this page</h1>;
+  console.log(user);
+
+  if (isLoading) {
+    return <Loading />;
   }
 
   return (
     <>
-      {isLoading && <Loading />}
-      <h1>{user.email}</h1>
+      <h1>{userInfo?.email}</h1>
     </>
   );
 }

@@ -11,8 +11,20 @@ import Signup from "./pages/Signup";
 import SearchProduct from "./pages/SearchProduct";
 import AuthLayout from "./pages/AuthLayout";
 import AdminDashboard from "./pages/AdminDashboard";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { fetchUser } from "./features/user/userSlice";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const tokenString = localStorage.getItem("token");
+    if (tokenString) {
+      dispatch(fetchUser(JSON.parse(tokenString)));
+    }
+  }, [dispatch]);
+
   return (
     <BrowserRouter>
       <Routes>
@@ -23,6 +35,7 @@ function App() {
           <Route path="cart" element={<Cart />} />
           <Route path="user" element={<UserDetails />} />
           <Route path="search" element={<SearchProduct />} />
+          <Route path="/admindashboard" element={<AdminDashboard />} />
 
           <Route path="*" element={<Error />} />
         </Route>
@@ -30,7 +43,6 @@ function App() {
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />
         </Route>
-        <Route path="/admindashboard" element={<AdminDashboard />} />
       </Routes>
     </BrowserRouter>
   );

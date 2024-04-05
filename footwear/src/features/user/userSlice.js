@@ -12,25 +12,34 @@ const initialState = {
 };
 
 // fetch user details (token required)
-export const fetchUser = createAsyncThunk("user/fetchUser", async (token) => {
-  try {
-    const response = await fetch(baseUrl + "user/myaccount", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.log(error);
-    return {};
-  }
-});
+export const fetchUser = createAsyncThunk(
+  "user/fetchUser",
+  async (token, thunkAPI) => {
+    try {
+      thunkAPI.dispatch({ type: "user/setLoading", payload: true });
+      const response = await fetch(baseUrl + "user/myaccount", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = await response.json();
+      thunkAPI.dispatch({ type: "user/setUserData", payload: data });
+      // thunkAPI.dispatch({ type: "cart/setLoading", payload: false });
+      return data;
+    } catch (error) {
+      console.log(error);
+      return {};
+    }
+  },
+);
 
 const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
+    setUserData(state, action) {
+      state.user = action.payload;
+    },
     setUser(state, action) {
       state.isUser = action.payload;
     },
@@ -76,6 +85,7 @@ export function login({ email, password }) {
 
       if (response.status === 200) {
         dispatch({ type: "user/login", payload: data.token });
+        dispatch(fetchUser(data.token));
       }
 
       if (response.status === 401 || response.status === 404) {
