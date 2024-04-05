@@ -9,7 +9,7 @@ import { setUser } from "../features/user/userSlice";
 function Navbar() {
   const [isNavLinkShown, setIsNavLinkShown] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const { isUser } = useSelector((store) => store.user);
+  const { isUser, user } = useSelector((store) => store.user);
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
@@ -67,18 +67,22 @@ function Navbar() {
         </form>
 
         <div className="flex w-60 gap-3 rounded-full border-2 px-4 py-2 md:w-auto">
-          <Link
-            to={"cart"}
-            onClick={() => {
-              setIsNavLinkShown(false);
-              onLinkClick();
-            }}
-            className="flex cursor-pointer items-center gap-1 text-xs"
-          >
-            <HiOutlineShoppingBag className="text-3xl" />
-            <p className="md:hidden lg:block">Cart</p>
-          </Link>
-          <div className="border-2"></div>
+          {user.userType !== "Admin" && (
+            <>
+              <Link
+                to={"cart"}
+                onClick={() => {
+                  setIsNavLinkShown(false);
+                  onLinkClick();
+                }}
+                className="flex cursor-pointer items-center gap-1 text-xs"
+              >
+                <HiOutlineShoppingBag className="text-3xl" />
+                <p className="md:hidden lg:block">Cart</p>
+              </Link>
+              <div className="border-2"></div>
+            </>
+          )}
           <Link
             to={isUser ? "user" : "auth/login"}
             onClick={() => {

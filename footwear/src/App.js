@@ -14,6 +14,9 @@ import AdminDashboard from "./pages/AdminDashboard";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { fetchUser } from "./features/user/userSlice";
+import AddAdmin from "./pages/AddAdmin";
+import AdminOrders from "./pages/AdminOrders";
+import SearchScreen from "./components/SearchScreen";
 
 function App() {
   const dispatch = useDispatch();
@@ -35,7 +38,11 @@ function App() {
           <Route path="cart" element={<Cart />} />
           <Route path="user" element={<UserDetails />} />
           <Route path="search" element={<SearchProduct />} />
-          <Route path="/admindashboard" element={<AdminDashboard />} />
+          <Route path="/admindashboard" element={<AdminDashboard />}>
+            <Route path="add-admin" element={<AddAdmin />} />
+            <Route path="our-products" element={<SearchScreen />} />
+            <Route path="admin-orders" element={<AdminOrders />} />
+          </Route>
 
           <Route path="*" element={<Error />} />
         </Route>
