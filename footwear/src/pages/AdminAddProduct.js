@@ -5,7 +5,7 @@ import { addProduct } from "../features/product/productSlice";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const AdminAddProduct = () => {
+const AdminAddProduct = ({ edit = false }) => {
   const [product, setProduct] = useState({
     name: "",
     price: "",
@@ -67,7 +67,7 @@ const AdminAddProduct = () => {
   };
 
   return (
-    <div className="mx-10 md:w-2/3 lg:w-1/2">
+    <div className="">
       <form
         onSubmit={handleSubmit}
         className="mb-4 rounded bg-white px-8 pb-8 pt-6"
