@@ -1,7 +1,7 @@
 import React from "react";
 import AdminAddProduct from "../../pages/AdminAddProduct";
 
-const ProductModal = ({ setShowModal }) => {
+const ProductModal = ({ setShowModal, edit, id }) => {
   return (
     <>
       <div className="m-5 flex justify-center">
@@ -55,7 +55,7 @@ const ProductModal = ({ setShowModal }) => {
                 <span className="sr-only">Close modal</span>
               </button>
             </div>
-            <AdminAddProduct />
+            <AdminAddProduct edit={edit} id={id} />
             {/* <form action="#">
               <div className="mb-4 grid gap-4 sm:grid-cols-2">
                 <div>

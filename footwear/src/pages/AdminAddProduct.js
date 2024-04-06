@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addProduct } from "../features/product/productSlice";
+import {
+  addProduct,
+  fetchSingleProduct,
+} from "../features/product/productSlice";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const AdminAddProduct = ({ edit = false }) => {
+const AdminAddProduct = ({ edit = false, id }) => {
   const [product, setProduct] = useState({
     name: "",
     price: "",
@@ -16,7 +19,7 @@ const AdminAddProduct = ({ edit = false }) => {
     image: "",
   });
 
-  const { isLoading } = useSelector((store) => store.product);
+  const { isLoading, singleProduct } = useSelector((store) => store.product);
   const dispatch = useDispatch();
 
   //   Toast notification
@@ -66,6 +69,14 @@ const AdminAddProduct = ({ edit = false }) => {
     });
   };
 
+  useEffect(() => {
+    if (edit) {
+      dispatch(fetchSingleProduct("/" + id));
+      setProduct(singleProduct);
+    }
+  }, [dispatch, id, edit, singleProduct]);
+
+  console.log(id);
   return (
     <div className="">
       <form
@@ -207,7 +218,7 @@ const AdminAddProduct = ({ edit = false }) => {
             }`}
             type="submit"
           >
-            {isLoading ? "Loading..." : "Add Product"}
+            {isLoading ? "Loading..." : edit ? "Edit" : "Add Product"}
           </button>
         </div>
         <ToastContainer position="bottom-left" />

@@ -3,7 +3,7 @@ import { AiFillStar, AiOutlineDelete } from "react-icons/ai";
 import { FaRegEdit } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteProduct, fetchProducts } from "../features/product/productSlice";
+import { deleteProduct } from "../features/product/productSlice";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -23,6 +23,7 @@ function ProductCard({ _id: id, name, price, desc, rating, brand, image }) {
     notifyDeleted();
   };
 
+  console.log(showModal);
   return (
     <>
       <div className="overflow-hidden rounded-xl p-3 shadow-md">
@@ -63,7 +64,9 @@ function ProductCard({ _id: id, name, price, desc, rating, brand, image }) {
 
         <ToastContainer position="bottom-left" />
       </div>
-      {showModal && <ProductModal setShowModal={setShowModal} />}
+      {showModal && (
+        <ProductModal setShowModal={setShowModal} edit={true} id={id} />
+      )}
     </>
   );
 }
