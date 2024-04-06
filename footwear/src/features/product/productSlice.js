@@ -117,4 +117,24 @@ export function addProduct(productDetails) {
     }
   };
 }
+
+export function deleteProduct(productID) {
+  return async (dispatch, getState) => {
+    try {
+      const response = await fetch(baseUrl + `products/${productID}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json", // This is required!!!
+        },
+      });
+      const data = await response.json();
+      // Fetch products again after deleting
+      dispatch(fetchProducts("/"));
+      return "success";
+    } catch (error) {
+      console.log(error);
+      return;
+    }
+  };
+}
 export default productSlice.reducer;

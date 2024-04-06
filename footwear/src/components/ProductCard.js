@@ -2,10 +2,23 @@ import React from "react";
 import { AiFillStar, AiOutlineDelete } from "react-icons/ai";
 import { FaRegEdit } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteProduct, fetchProducts } from "../features/product/productSlice";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function ProductCard({ _id: id, name, price, desc, rating, brand, image }) {
   const { user } = useSelector((store) => store.user);
+  const dispatch = useDispatch();
+
+  //   Toast notification
+  const notifyDeleted = () => toast.success("Product has been deleted");
+
+  const handleDeleteProduct = async () => {
+    dispatch(deleteProduct(id));
+    notifyDeleted();
+  };
 
   return (
     <div className="overflow-hidden rounded-xl p-3 shadow-md">
@@ -29,9 +42,7 @@ function ProductCard({ _id: id, name, price, desc, rating, brand, image }) {
           <div className="flex items-center justify-between gap-2">
             <AiOutlineDelete
               className="cursor-pointer text-3xl text-red-500"
-              onClick={() => {
-                console.log("EDITTTT");
-              }}
+              onClick={handleDeleteProduct}
             />
             <FaRegEdit
               className="cursor-pointer text-2xl text-green-500"
@@ -42,6 +53,7 @@ function ProductCard({ _id: id, name, price, desc, rating, brand, image }) {
           </div>
         )}
       </div>
+      <ToastContainer position="bottom-left" />
     </div>
   );
 }
