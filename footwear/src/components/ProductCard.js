@@ -4,16 +4,25 @@ import { FaRegEdit } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteProduct } from "../features/product/productSlice";
+import { useSearchParams } from "react-router-dom";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ProductModal from "./Modal/ProductModal";
 
-function ProductCard({ _id: id, name, price, desc, rating, brand, image }) {
-  const [showModal, setShowModal] = useState(false);
-
+function ProductCard({
+  _id: id,
+  name,
+  price,
+  desc,
+  rating,
+  brand,
+  image,
+  setShowModal,
+}) {
   const { user } = useSelector((store) => store.user);
   const dispatch = useDispatch();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   //   Toast notification
   const notifyDeleted = () => toast.success("Product has been deleted");
@@ -23,7 +32,6 @@ function ProductCard({ _id: id, name, price, desc, rating, brand, image }) {
     notifyDeleted();
   };
 
-  console.log(showModal);
   return (
     <>
       <div className="overflow-hidden rounded-xl p-3 shadow-md">
@@ -56,6 +64,7 @@ function ProductCard({ _id: id, name, price, desc, rating, brand, image }) {
                 className="cursor-pointer text-2xl text-green-500"
                 onClick={() => {
                   setShowModal(true);
+                  setSearchParams({ product: id });
                 }}
               />
             </div>
@@ -64,9 +73,6 @@ function ProductCard({ _id: id, name, price, desc, rating, brand, image }) {
 
         <ToastContainer position="bottom-left" />
       </div>
-      {showModal && (
-        <ProductModal setShowModal={setShowModal} edit={true} id={id} />
-      )}
     </>
   );
 }

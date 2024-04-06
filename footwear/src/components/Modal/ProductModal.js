@@ -1,7 +1,10 @@
 import React from "react";
 import AdminAddProduct from "../../pages/AdminAddProduct";
+import { useSearchParams } from "react-router-dom";
 
-const ProductModal = ({ setShowModal, edit, id }) => {
+const ProductModal = ({ setShowModal, edit }) => {
+  const [searchParams, setSearchParams] = useSearchParams();
+
   return (
     <>
       <div className="m-5 flex justify-center">
@@ -22,7 +25,7 @@ const ProductModal = ({ setShowModal, edit, id }) => {
         id="defaultModal"
         tabIndex="-1"
         aria-hidden="true"
-        className="left-0 z-50 translate-y-[-60%] items-center justify-center overflow-y-auto overflow-x-hidden sm:w-max sm:translate-y-[-50%] md:inset-0 md:h-full md:translate-x-[-30%] lg:translate-x-[-100%] lg:translate-y-0 xl:translate-x-[-80%]"
+        className="left-0 z-[5000] translate-y-[-60%] items-center justify-center overflow-y-auto overflow-x-hidden sm:w-max sm:translate-y-[-50%] md:inset-0 md:h-full md:translate-x-[-30%] lg:translate-x-[-100%] lg:translate-y-0 xl:translate-x-[-80%]"
       >
         <div className="relative h-full w-full max-w-2xl md:h-auto">
           <div className="relative rounded-lg bg-white p-2 shadow dark:bg-gray-800 sm:p-5">
@@ -42,8 +45,11 @@ const ProductModal = ({ setShowModal, edit, id }) => {
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
                   onClick={() => {
+                    if (searchParams.has("product")) {
+                      searchParams.delete("product");
+                      setSearchParams(searchParams);
+                    }
                     setShowModal(false);
-                    console.log("TEST");
                   }}
                 >
                   <path
@@ -55,7 +61,7 @@ const ProductModal = ({ setShowModal, edit, id }) => {
                 <span className="sr-only">Close modal</span>
               </button>
             </div>
-            <AdminAddProduct edit={edit} id={id} />
+            <AdminAddProduct edit={edit} />
             {/* <form action="#">
               <div className="mb-4 grid gap-4 sm:grid-cols-2">
                 <div>

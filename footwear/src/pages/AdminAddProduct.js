@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import {
-  addProduct,
-  fetchSingleProduct,
-} from "../features/product/productSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addProduct } from "../features/product/productSlice";
 
+import { useSearchParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const AdminAddProduct = ({ edit = false, id }) => {
+const AdminAddProduct = ({ edit = false }) => {
   const [product, setProduct] = useState({
     name: "",
     price: "",
@@ -19,13 +17,20 @@ const AdminAddProduct = ({ edit = false, id }) => {
     image: "",
   });
 
-  const { isLoading, singleProduct } = useSelector((store) => store.product);
+  const { isLoading, products } = useSelector((store) => store.product);
   const dispatch = useDispatch();
 
   //   Toast notification
   const notifyAdded = () => toast.success("Product has been added");
   const notifyError = () => toast.error("Error occured");
   const notifySizeError = () => toast.error("Please add size");
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  useEffect(() => {
+    const productId = searchParams.get("product");
+    const singleProduct = products.find(({ _id }) => _id === productId);
+    setProduct(singleProduct);
+  }, [searchParams, setSearchParams, products]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -47,36 +52,40 @@ const AdminAddProduct = ({ edit = false, id }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (product.sizes.length === 0) {
-      notifySizeError();
-      return;
-    }
-    const status = await dispatch(addProduct(product));
-    if (status === "success") {
-      notifyAdded();
-    } else {
-      notifyError();
-    }
+    if (!edit) {
+      // Create Product Case
+      if (product.sizes.length === 0) {
+        notifySizeError();
+        return;
+      }
+      const status = await dispatch(addProduct(product));
+      if (status === "success") {
+        notifyAdded();
+      } else {
+        notifyError();
+      }
 
-    setProduct({
-      name: "",
-      price: "",
-      desc: "",
-      rating: "",
-      brand: "",
-      sizes: [],
-      image: "",
-    });
+      setProduct({
+        name: "",
+        price: "",
+        desc: "",
+        rating: "",
+        brand: "",
+        sizes: [],
+        image: "",
+      });
+    } else {
+      // Edit Product Case
+    }
   };
 
-  useEffect(() => {
-    if (edit) {
-      dispatch(fetchSingleProduct("/" + id));
-      setProduct(singleProduct);
-    }
-  }, [dispatch, id, edit, singleProduct]);
+  // useEffect(() => {
+  //   if (edit) {
+  //     dispatch(fetchSingleProduct("/" + id));
+  //     setProduct(singleProduct);
+  //   }
+  // }, [dispatch, id, edit, singleProduct]);
 
-  console.log(id);
   return (
     <div className="">
       <form
