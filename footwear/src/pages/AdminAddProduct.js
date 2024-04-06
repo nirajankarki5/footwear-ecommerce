@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addProduct } from "../features/product/productSlice";
+import { addProduct, editProduct } from "../features/product/productSlice";
 
 import { useSearchParams } from "react-router-dom";
+
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const AdminAddProduct = ({ edit = false }) => {
+const AdminAddProduct = ({ edit = false, setShowModal }) => {
   const [product, setProduct] = useState({
     name: "",
     price: "",
@@ -24,12 +25,15 @@ const AdminAddProduct = ({ edit = false }) => {
   const notifyAdded = () => toast.success("Product has been added");
   const notifyError = () => toast.error("Error occured");
   const notifySizeError = () => toast.error("Please add size");
+  const notifySuccess = () => toast.success("Success");
   const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
     const productId = searchParams.get("product");
-    const singleProduct = products.find(({ _id }) => _id === productId);
-    setProduct(singleProduct);
+    if (productId) {
+      const singleProduct = products.find(({ _id }) => _id === productId);
+      setProduct(singleProduct);
+    }
   }, [searchParams, setSearchParams, products]);
 
   const handleChange = (e) => {
@@ -37,9 +41,9 @@ const AdminAddProduct = ({ edit = false }) => {
     setProduct({ ...product, [name]: value });
   };
 
-  const handleSizeChange = (e) => {
+  const handleSizeChange = async (e) => {
     const { value } = e.target;
-    const newSize = parseFloat(value);
+    const newSize = value;
     if (!product.sizes.includes(newSize)) {
       setProduct({ ...product, sizes: [...product.sizes, newSize].sort() });
     } else {
@@ -76,6 +80,12 @@ const AdminAddProduct = ({ edit = false }) => {
       });
     } else {
       // Edit Product Case
+      const productId = searchParams.get("product");
+      const status = await dispatch(editProduct({ product, productId }));
+      if (status === "success") {
+        notifySuccess();
+        setShowModal(false);
+      }
     }
   };
 
@@ -188,18 +198,24 @@ const AdminAddProduct = ({ edit = false }) => {
             Sizes
           </label>
           <div className="flex flex-wrap">
-            {Array.from({ length: 15 }, (_, i) => i / 2 + 7).map((size) => (
-              <label key={size} className="mb-2 mr-4 inline-flex items-center">
-                <input
-                  type="checkbox"
-                  className="form-checkbox h-5 w-5 text-gray-600"
-                  value={size}
-                  onChange={handleSizeChange}
-                  checked={product.sizes.includes(size)}
-                />
-                <span className="ml-2 text-gray-700">{size}</span>
-              </label>
-            ))}
+            {Array.from({ length: 15 }, (_, i) => i / 2 + 7).map((size) => {
+              const updatedSize = size.toString();
+              return (
+                <label
+                  key={size}
+                  className="mb-2 mr-4 inline-flex items-center"
+                >
+                  <input
+                    type="checkbox"
+                    className="form-checkbox h-5 w-5 text-gray-600"
+                    value={size}
+                    onChange={handleSizeChange}
+                    checked={product.sizes.includes(updatedSize)}
+                  />
+                  <span className="ml-2 text-gray-700">{size}</span>
+                </label>
+              );
+            })}
           </div>
         </div>
         <div className="mb-4">
@@ -227,7 +243,7 @@ const AdminAddProduct = ({ edit = false }) => {
             }`}
             type="submit"
           >
-            {isLoading ? "Loading..." : edit ? "Edit" : "Add Product"}
+            {isLoading ? "Loading..." : edit ? "Update" : "Add Product"}
           </button>
         </div>
         <ToastContainer position="bottom-left" />

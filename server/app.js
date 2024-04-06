@@ -32,7 +32,7 @@ app.use("/api/orders", orderRouter);
 app.use(notFound);
 app.use(errorHandler);
 
-const port = process.env.port || 3001;
+const port = process.env.port || 5000;
 
 const start = async () => {
   try {

@@ -118,6 +118,31 @@ export function addProduct(productDetails) {
   };
 }
 
+export function editProduct({ product, productId }) {
+  return async (dispatch, getState) => {
+    try {
+      console.log(product, productId);
+      dispatch({ type: "product/setLoading", payload: true });
+      const response = await fetch(baseUrl + `products/${productId}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json", // This is required!!!
+        },
+        body: JSON.stringify(product),
+      });
+
+      dispatch({ type: "product/setLoading", payload: false });
+      if (response.status === 200) {
+        return "success";
+      }
+    } catch (error) {
+      console.log(error);
+      dispatch({ type: "product/setLoading", payload: false });
+      return;
+    }
+  };
+}
+
 export function deleteProduct(productID) {
   return async (dispatch, getState) => {
     try {
