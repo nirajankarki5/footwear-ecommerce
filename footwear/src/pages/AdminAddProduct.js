@@ -67,7 +67,7 @@ const AdminAddProduct = () => {
   };
 
   return (
-    <div className="mx-10 lg:w-1/2">
+    <div className="mx-10 md:w-2/3 lg:w-1/2">
       <form
         onSubmit={handleSubmit}
         className="mb-4 rounded bg-white px-8 pb-8 pt-6"
