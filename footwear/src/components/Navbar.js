@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { HiOutlineShoppingBag } from "react-icons/hi2";
-import { HiOutlineUserCircle } from "react-icons/hi2";
+import { HiOutlineShoppingBag, HiOutlineUserCircle } from "react-icons/hi2";
+import { MdOutlineSpaceDashboard } from "react-icons/md";
 import { HiBars3 } from "react-icons/hi2";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -67,22 +67,32 @@ function Navbar() {
         </form>
 
         <div className="flex w-60 gap-3 rounded-full border-2 px-4 py-2 md:w-auto">
-          {user.userType !== "Admin" && (
-            <>
-              <Link
-                to={"cart"}
-                onClick={() => {
-                  setIsNavLinkShown(false);
-                  onLinkClick();
-                }}
-                className="flex cursor-pointer items-center gap-1 text-xs"
-              >
-                <HiOutlineShoppingBag className="text-3xl" />
-                <p className="md:hidden lg:block">Cart</p>
-              </Link>
-              <div className="border-2"></div>
-            </>
+          {user.userType !== "Admin" ? (
+            <Link
+              to={"cart"}
+              onClick={() => {
+                setIsNavLinkShown(false);
+                onLinkClick();
+              }}
+              className="flex cursor-pointer items-center gap-1 text-xs"
+            >
+              <HiOutlineShoppingBag className="text-3xl" />
+              <p className="md:hidden lg:block">Cart</p>
+            </Link>
+          ) : (
+            <Link
+              to={"/admindashboard"}
+              onClick={() => {
+                setIsNavLinkShown(false);
+                onLinkClick();
+              }}
+              className="flex cursor-pointer items-center gap-1 text-xs"
+            >
+              <MdOutlineSpaceDashboard className="text-3xl" />
+              <p className="md:hidden lg:block">Dashboard</p>
+            </Link>
           )}
+          <div className="border-2"></div>
           <Link
             to={isUser ? "user" : "auth/login"}
             onClick={() => {

@@ -15,7 +15,7 @@ function AddAdmin() {
   const dispatch = useDispatch();
 
   //   Toast notification
-  const notifyAdded = () => toast.error("User has been added as Admin");
+  const notifyAdded = () => toast.success("User has been added as Admin");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -141,7 +141,7 @@ function AddAdmin() {
             type="button"
             onClick={handleSubmit}
           >
-            Add
+            Add Admin
           </button>
         </div>
       </div>

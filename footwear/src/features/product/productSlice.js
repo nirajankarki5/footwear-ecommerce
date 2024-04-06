@@ -47,9 +47,9 @@ const productSlice = createSlice({
     //   state.products = action.payload;
     //   state.isLoading = false;
     // },
-    // setLoading(state, action) {
-    //   state.isLoading = action.payload;
-    // },
+    setLoading(state, action) {
+      state.isLoading = action.payload;
+    },
     // getProductSearchTerm(state, action) {
     //   state.productSearchTerm = action.payload;
     // },
@@ -93,4 +93,28 @@ const productSlice = createSlice({
 
 export const { getProducts, setLoading, getProductSearchTerm } =
   productSlice.actions;
+
+export function addProduct(productDetails) {
+  return async (dispatch, getState) => {
+    try {
+      console.log(productDetails);
+      dispatch({ type: "product/setLoading", payload: true });
+      const response = await fetch(baseUrl + "products", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json", // This is required!!!
+        },
+        body: JSON.stringify(productDetails),
+      });
+      const data = await response.json();
+
+      dispatch({ type: "product/setLoading", payload: false });
+      return "success";
+    } catch (error) {
+      console.log(error);
+      dispatch({ type: "product/setLoading", payload: false });
+      return;
+    }
+  };
+}
 export default productSlice.reducer;

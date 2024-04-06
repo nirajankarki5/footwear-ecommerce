@@ -22,7 +22,7 @@ function AdminSidebar() {
         <AdminButton
           name="Add Admin"
           onClick={() => {
-            navigate("add-admin");
+            navigate("/admindashboard");
             setIsShowSidebar(false);
           }}
         />
@@ -30,6 +30,13 @@ function AdminSidebar() {
           name="Our Products"
           onClick={() => {
             navigate("our-products");
+            setIsShowSidebar(false);
+          }}
+        />
+        <AdminButton
+          name="Add Product"
+          onClick={() => {
+            navigate("admin-add-product");
             setIsShowSidebar(false);
           }}
         />
