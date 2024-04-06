@@ -9,6 +9,7 @@ const connectDB = require("./db/connect");
 const productsRoute = require("./routes/products");
 const userRoute = require("./routes/user");
 const cartRouter = require("./routes/cart");
+const orderRouter = require("./routes/order");
 
 // middlewares
 const notFound = require("./middleware/not-found");
@@ -26,11 +27,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/api/products", productsRoute);
 app.use("/api/user", userRoute);
 app.use("/api/cart", cartRouter);
+app.use("/api/orders", orderRouter);
 
 app.use(notFound);
 app.use(errorHandler);
 
-const port = process.env.port || 5000;
+const port = process.env.port || 3001;
 
 const start = async () => {
   try {
