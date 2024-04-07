@@ -75,7 +75,9 @@ function UserDetails() {
             <section>
               <p className="my-2">{user.email}</p>
               <p className="my-2">{user.userType}</p>
-              <p className="my-2">{user.createdAt}</p>
+              <p className="my-2">
+                {new Date(user.createdAt).toLocaleDateString()}
+              </p>
             </section>
           </aside>
           <Link

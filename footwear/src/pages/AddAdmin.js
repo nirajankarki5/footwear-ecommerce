@@ -34,6 +34,11 @@ function AddAdmin() {
     );
     // Signup success
     if (status === "success") {
+      setEmail("");
+      setPassword("");
+      setRepassword("");
+      setError("");
+
       notifyAdded();
       return;
     }
