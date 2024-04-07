@@ -19,6 +19,14 @@ const UserOrder = () => {
     return <Loading />;
   }
 
+  if (!order) {
+    return (
+      <h1 className="my-20 text-center text-4xl font-medium">
+        You have not placed any order
+      </h1>
+    );
+  }
+
   return (
     <>
       <h1 className="mx-2 my-5 text-4xl font-medium">My Orders</h1>

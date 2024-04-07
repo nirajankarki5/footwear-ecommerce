@@ -95,4 +95,30 @@ const orderSlice = createSlice({
 });
 
 export const { setNetworkError, setCart } = orderSlice.actions;
+
+export function createOrder({ orderDetails, token }) {
+  return async (dispatch, getState) => {
+    try {
+      console.log(orderDetails);
+      dispatch({ type: "order/setLoading", payload: true });
+      const response = await fetch(baseUrl + "orders/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json", // This is required!!!
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(orderDetails),
+      });
+      const data = await response.json();
+      console.log(data);
+      dispatch({ type: "order/setLoading", payload: false });
+      return "success";
+    } catch (error) {
+      console.log(error);
+      dispatch({ type: "order/setLoading", payload: false });
+      return;
+    }
+  };
+}
+
 export default orderSlice.reducer;

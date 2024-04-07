@@ -115,4 +115,23 @@ export function deleteCart({ url, token }) {
   };
 }
 
+export function removeCart(token) {
+  return async (dispatch, getState) => {
+    try {
+      const response = await fetch(baseUrl + "cart/removeCart", {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = await response.json();
+      console.log(data);
+      return "success";
+    } catch (error) {
+      console.log(error);
+      return;
+    }
+  };
+}
+
 export default cartSlice.reducer;

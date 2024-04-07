@@ -82,6 +82,7 @@ const deleteCartItems = async (req, res) => {
   res.status(200).json(cart);
 };
 
+// set all products to empty (when user clicks on clear cart)
 const deleteAllCart = async (req, res) => {
   const { id: userId } = req.user;
 
@@ -91,10 +92,22 @@ const deleteAllCart = async (req, res) => {
   res.status(200).json(cart);
 };
 
+// remove whole cart (after order is placed)
+const removeCart = async (req, res) => {
+  const { id: userId } = req.user;
+  const cart = await Cart.findOneAndDelete({ userId: userId });
+  if (!cart) {
+    throw new CustomAPIError("Cart not found", 404);
+  }
+
+  res.status(200).json(cart);
+};
+
 module.exports = {
   getAllCartItems,
   getUserCartItems,
   updateCart,
   deleteCartItems,
   deleteAllCart,
+  removeCart,
 };

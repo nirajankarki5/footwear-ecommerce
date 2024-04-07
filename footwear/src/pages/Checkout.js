@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchUserCart } from "../features/cart/cartSlice";
+import { fetchUserCart, removeCart } from "../features/cart/cartSlice";
 import Loading from "../components/Loading";
+import { createOrder } from "../features/order/orderSlice";
 
 const Checkout = () => {
   const [billingAddress, setBillingAddress] = useState("");
@@ -15,7 +16,7 @@ const Checkout = () => {
   const { isLoading, cart } = useSelector((store) => store.cart);
   const dispatch = useDispatch();
 
-  const handleOrder = (e) => {
+  const handleOrder = async (e) => {
     e.preventDefault();
 
     const orderData = {
@@ -31,7 +32,18 @@ const Checkout = () => {
       return;
     }
 
-    console.log(orderData);
+    const status = await dispatch(
+      createOrder({
+        orderDetails: orderData,
+        token: JSON.parse(localStorage.getItem("token")),
+      }),
+    );
+    if (status === "success") {
+      setIsOrderPlaced(true);
+      // also remove cart
+
+      dispatch(removeCart(JSON.parse(localStorage.getItem("token"))));
+    }
   };
 
   useEffect(() => {
@@ -67,7 +79,10 @@ const Checkout = () => {
     return (
       <p className="my-10 text-center text-xl text-gray-400">
         Thank you for your order. View your orders in{" "}
-        <Link to={"/user"}> your profile</Link>
+        <Link to={"/user"} className="text-blue-600 underline">
+          {" "}
+          your profile
+        </Link>
       </p>
     );
   }
