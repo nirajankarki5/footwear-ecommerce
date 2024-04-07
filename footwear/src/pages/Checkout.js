@@ -4,20 +4,16 @@ import { Link } from "react-router-dom";
 import { fetchUserCart } from "../features/cart/cartSlice";
 import Loading from "../components/Loading";
 
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-
 const Checkout = () => {
   const [billingAddress, setBillingAddress] = useState("");
   const [shippingAddress, setShippingAddress] = useState("");
   const [totalPrice, setTotalPrice] = useState(null);
   const [error, setError] = useState("");
+  const [isOrderPlaced, setIsOrderPlaced] = useState(false);
 
   const { isUser, user } = useSelector((store) => store.user);
   const { isLoading, cart } = useSelector((store) => store.cart);
   const dispatch = useDispatch();
-
-  const notifyOrder = () => toast.success("Order Placed");
 
   const handleOrder = (e) => {
     e.preventDefault();
@@ -64,6 +60,15 @@ const Checkout = () => {
       <h1 className="my-20 text-center text-4xl font-medium">
         Your cart is empty
       </h1>
+    );
+  }
+
+  if (isOrderPlaced) {
+    return (
+      <p className="my-10 text-center text-xl text-gray-400">
+        Thank you for your order. View your orders in{" "}
+        <Link to={"/user"}> your profile</Link>
+      </p>
     );
   }
 
