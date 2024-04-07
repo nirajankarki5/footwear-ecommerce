@@ -13,7 +13,7 @@ const initialState = {
 
 export const fetchOrders = createAsyncThunk(
   "order/fetchOrders",
-  async (url) => {
+  async (token) => {
     try {
       const response = await fetch(baseUrl + "getAllOrders");
       const data = await response.json();
@@ -29,9 +29,9 @@ export const fetchUserOrder = createAsyncThunk(
   "order/fetchUserOrder",
   //   if we use thunkAPI, it we can only use one parameter
   //   thunkAPI is used to use dispatch
-  async ({ token }, thunkAPI) => {
+  async (token, thunkAPI) => {
     try {
-      const response = await fetch(baseUrl + "getOrderByUserId", {
+      const response = await fetch(baseUrl + "orders/getOrderByUserId", {
         headers: {
           Authorization: `Bearer ${token}`,
         },

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { CiUser } from "react-icons/ci";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUser } from "../features/user/userSlice";
@@ -77,14 +77,20 @@ function UserDetails() {
               <p className="my-2">{user.userType}</p>
               <p className="my-2">{user.createdAt}</p>
             </section>
-
-            <button
-              onClick={logout}
-              className="my-5 rounded-full bg-stone-800 py-4 text-gray-100 md:w-32"
-            >
-              Logout
-            </button>
           </aside>
+          <Link
+            to={"orders"}
+            className="my-5 mr-5 block rounded-full border-2 bg-gray-100 py-4 text-center text-stone-800 md:inline-block md:w-32"
+          >
+            My Orders
+          </Link>
+
+          <button
+            onClick={logout}
+            className="my-5 block w-full rounded-full bg-stone-800 py-4 text-gray-100 md:inline-block md:w-32"
+          >
+            Logout
+          </button>
         </section>
       )}
     </div>
