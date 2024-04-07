@@ -9,6 +9,7 @@ import Loading from "../components/Loading";
 import CartItem from "../components/CartItem";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Link } from "react-router-dom";
 
 function Cart() {
   const { isUser } = useSelector((store) => store.user);
@@ -109,7 +110,12 @@ function Cart() {
             </h2>
 
             <div className="my-5 grid grid-cols-2 gap-1 text-center text-lg lg:my-10 lg:text-xl">
-              <button className="bg-gray-900 text-gray-200">Checkout</button>
+              <Link
+                to={"/checkout"}
+                className="flex items-center justify-center bg-gray-900 text-gray-200"
+              >
+                Checkout
+              </Link>
               <button
                 onClick={() => deleteCartItem("/deleteCart")}
                 className="border-2 border-red-500 px-10 py-3 text-red-500 lg:px-16 lg:py-5 lg:text-lg"

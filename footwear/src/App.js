@@ -18,6 +18,7 @@ import AddAdmin from "./pages/AddAdmin";
 import AdminOrders from "./pages/AdminOrders";
 import SearchScreen from "./components/SearchScreen";
 import AdminAddProduct from "./pages/AdminAddProduct";
+import Checkout from "./pages/Checkout";
 
 function App() {
   const dispatch = useDispatch();
@@ -37,6 +38,7 @@ function App() {
           <Route path="products" element={<Products />} />
           <Route path="products/:id" element={<SingleProduct />} />
           <Route path="cart" element={<Cart />} />
+          <Route path="checkout" element={<Checkout />} />
           <Route path="user" element={<UserDetails />} />
           <Route path="search" element={<SearchProduct />} />
           <Route path="/admindashboard" element={<AdminDashboard />}>
