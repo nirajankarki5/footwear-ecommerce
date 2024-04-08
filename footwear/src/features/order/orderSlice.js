@@ -6,7 +6,7 @@ import { baseUrl } from "../../utils/constants";
 
 const initialState = {
   isLoading: false,
-  order: {},
+  order: [],
   orders: [],
   networkError: null,
 };

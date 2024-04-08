@@ -9,7 +9,7 @@ const getAllOrders = async (req, res) => {
 const getOrderByUserId = async (req, res) => {
   const { id: userId } = req.user;
 
-  const userOrderItems = await Order.findOne({ userId: userId });
+  const userOrderItems = await Order.find({ userId: userId });
   res.status(200).json(userOrderItems);
 };
 
