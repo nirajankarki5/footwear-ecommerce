@@ -107,6 +107,7 @@ export function addProduct(productDetails) {
         body: JSON.stringify(productDetails),
       });
       const data = await response.json();
+      console.log(data);
 
       dispatch({ type: "product/setLoading", payload: false });
       return "success";
@@ -153,6 +154,7 @@ export function deleteProduct(productID) {
         },
       });
       const data = await response.json();
+      console.log(data);
       // Fetch products again after deleting
       dispatch(fetchProducts("/"));
       return "success";
