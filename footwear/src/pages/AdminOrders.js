@@ -89,13 +89,13 @@ function AdminOrders() {
               <div className="mt-4 flex justify-between">
                 <button
                   onClick={() => {}}
-                  className="focus:shadow-outline rounded bg-green-500 px-4 py-2 font-semibold text-white hover:bg-green-700 focus:outline-none"
+                  className="rounded border-2 border-green-500 px-4 py-2 font-semibold text-green-500 hover:bg-green-500 hover:text-white"
                 >
                   Approve
                 </button>
                 <button
                   onClick={() => {}}
-                  className="focus:shadow-outline rounded bg-red-500 px-4 py-2 font-semibold text-white hover:bg-red-700 focus:outline-none"
+                  className="rounded border-2 border-red-500 px-4 py-2 font-semibold text-red-500 hover:bg-red-500 hover:text-white"
                 >
                   Reject
                 </button>
