@@ -15,7 +15,11 @@ export const fetchOrders = createAsyncThunk(
   "order/fetchOrders",
   async (token) => {
     try {
-      const response = await fetch(baseUrl + "getAllOrders");
+      const response = await fetch(baseUrl + "orders/getAllOrders", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       const data = await response.json();
       return data;
     } catch (error) {
