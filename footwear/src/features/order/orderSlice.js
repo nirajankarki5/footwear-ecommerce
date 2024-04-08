@@ -125,4 +125,31 @@ export function createOrder({ orderDetails, token }) {
   };
 }
 
+export function updateOrderStatus({ updatedStatus, orderId, token }) {
+  return async (dispatch, getState) => {
+    try {
+      console.log(updatedStatus, orderId);
+      dispatch({ type: "order/setLoading", payload: true });
+      const response = await fetch(baseUrl + `orders/${orderId}`, {
+        method: "PATCH",
+
+        headers: {
+          "Content-Type": "application/json", // This is required!!!
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ status: updatedStatus }),
+      });
+
+      dispatch({ type: "order/setLoading", payload: false });
+      if (response.status === 200) {
+        return "success";
+      }
+    } catch (error) {
+      console.log(error);
+      dispatch({ type: "order/setLoading", payload: false });
+      return;
+    }
+  };
+}
+
 export default orderSlice.reducer;

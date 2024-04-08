@@ -1,9 +1,8 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Outlet } from "react-router-dom";
 import Loading from "../components/Loading";
 import AdminSidebar from "../components/AdminSidebar";
-import { Outlet } from "react-router-dom";
 
 function AdminDashboard() {
   const { user, isLoading } = useSelector((store) => store.user);

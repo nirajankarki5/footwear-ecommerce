@@ -2,14 +2,32 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "../components/Loading";
-import { fetchOrders } from "../features/order/orderSlice";
+import { fetchOrders, updateOrderStatus } from "../features/order/orderSlice";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function AdminOrders() {
   const { isLoading, orders } = useSelector((store) => store.order);
   const dispatch = useDispatch();
 
-  const handleStatusChange = async (status) => {
-    console.log(status);
+  // Toast Notification
+  const notifySuccess = () => toast.success("Success");
+
+  const handleStatusChange = async (orderStatus, orderId) => {
+    const status = await dispatch(
+      updateOrderStatus({
+        updatedStatus: orderStatus,
+        orderId,
+        token: JSON.parse(localStorage.getItem("token")),
+      }),
+    );
+
+    if (status === "success") {
+      notifySuccess();
+      const tokenString = localStorage.getItem("token");
+      dispatch(fetchOrders(JSON.parse(tokenString)));
+    }
   };
 
   useEffect(() => {
@@ -104,7 +122,7 @@ function AdminOrders() {
                 <div className="mt-4 flex justify-between">
                   <button
                     onClick={() => {
-                      handleStatusChange("Approved");
+                      handleStatusChange("Approved", order._id);
                     }}
                     className="rounded border-2 border-green-500 px-4 py-2 font-semibold text-green-500 hover:bg-green-500 hover:text-white"
                   >
@@ -112,7 +130,7 @@ function AdminOrders() {
                   </button>
                   <button
                     onClick={() => {
-                      handleStatusChange("Rejected");
+                      handleStatusChange("Rejected", order._id);
                     }}
                     className="rounded border-2 border-red-500 px-4 py-2 font-semibold text-red-500 hover:bg-red-500 hover:text-white"
                   >
@@ -123,6 +141,7 @@ function AdminOrders() {
             </div>
           ))}
       </div>
+      <ToastContainer position="bottom-left" />
     </div>
   );
 }
