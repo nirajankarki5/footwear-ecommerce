@@ -39,13 +39,17 @@ const createOrder = async (req, res) => {
 const updateOrder = async (req, res) => {
   const { status } = req.body;
 
-  const updatedOrder = await Order.updateOne(
+  const updatedOrder = await Order.findOneAndUpdate(
     { _id: req.params.id },
     {
       status,
+    },
+    {
+      new: true,
+      runValidators: true,
     }
   );
-  return res.status(201).json(updatedOrder);
+  return res.status(200).json(updatedOrder);
 };
 
 const deleteOrder = async (req, res) => {

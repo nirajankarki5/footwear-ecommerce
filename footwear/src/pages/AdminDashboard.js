@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Loading from "../components/Loading";
@@ -20,10 +20,10 @@ function AdminDashboard() {
   }
 
   return (
-    <div className="grid h-full grid-rows-[auto_1fr] gap-x-2">
+    <div className="grid h-full grid-cols-1 grid-rows-[auto_1fr] gap-x-2 md:grid-cols-[auto_1fr] md:grid-rows-1">
       <AdminSidebar />
 
-      <div className="md:ml-80">
+      <div className="">
         <Outlet />
       </div>
     </div>

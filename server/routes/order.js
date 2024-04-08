@@ -15,7 +15,7 @@ router.post("/create", authMiddleware, createOrder);
 router.get("/getOrderById", authMiddleware, getOrderById);
 router.get("/getAllOrders", authMiddleware, getAllOrders);
 router.get("/getOrderByUserId", authMiddleware, getOrderByUserId);
-router.put("/updateOrder", authMiddleware, updateOrder);
+router.patch("/:id", authMiddleware, updateOrder);
 router.delete("/deleteOrder", authMiddleware, deleteOrder);
 
 module.exports = router;

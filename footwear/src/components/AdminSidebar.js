@@ -16,7 +16,7 @@ function AdminSidebar() {
       />
 
       <div
-        className={`fixed z-30 h-full w-80 border-x-2 bg-white  p-4 transition-all md:translate-x-0 ${
+        className={`fixed z-30 h-full w-80 border-x-2 bg-white p-4  transition-all md:static md:translate-x-0 ${
           isShowSidebar ? "translate-x-100" : "translate-x-[-100%]"
         }`}
       >

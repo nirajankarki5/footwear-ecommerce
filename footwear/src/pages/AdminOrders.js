@@ -8,6 +8,10 @@ function AdminOrders() {
   const { isLoading, orders } = useSelector((store) => store.order);
   const dispatch = useDispatch();
 
+  const handleStatusChange = async (status) => {
+    console.log(status);
+  };
+
   useEffect(() => {
     window.scrollTo(0, 0);
     const tokenString = localStorage.getItem("token");
@@ -78,7 +82,17 @@ function AdminOrders() {
                   </tr>
                   <tr>
                     <td className="font-semibold">Status:</td>
-                    <td>{order.status}</td>
+                    <td
+                      className={`font-semibold ${
+                        order.status === "Pending"
+                          ? "text-yellow-500"
+                          : order.status === "Rejected"
+                          ? "text-red-500"
+                          : "text-green-500"
+                      }`}
+                    >
+                      {order.status}
+                    </td>
                   </tr>
                   <tr>
                     <td className="font-semibold">Created At:</td>
@@ -86,20 +100,26 @@ function AdminOrders() {
                   </tr>
                 </tbody>
               </table>
-              <div className="mt-4 flex justify-between">
-                <button
-                  onClick={() => {}}
-                  className="rounded border-2 border-green-500 px-4 py-2 font-semibold text-green-500 hover:bg-green-500 hover:text-white"
-                >
-                  Approve
-                </button>
-                <button
-                  onClick={() => {}}
-                  className="rounded border-2 border-red-500 px-4 py-2 font-semibold text-red-500 hover:bg-red-500 hover:text-white"
-                >
-                  Reject
-                </button>
-              </div>
+              {order.status === "Pending" && (
+                <div className="mt-4 flex justify-between">
+                  <button
+                    onClick={() => {
+                      handleStatusChange("Approved");
+                    }}
+                    className="rounded border-2 border-green-500 px-4 py-2 font-semibold text-green-500 hover:bg-green-500 hover:text-white"
+                  >
+                    Approve
+                  </button>
+                  <button
+                    onClick={() => {
+                      handleStatusChange("Rejected");
+                    }}
+                    className="rounded border-2 border-red-500 px-4 py-2 font-semibold text-red-500 hover:bg-red-500 hover:text-white"
+                  >
+                    Reject
+                  </button>
+                </div>
+              )}
             </div>
           ))}
       </div>
