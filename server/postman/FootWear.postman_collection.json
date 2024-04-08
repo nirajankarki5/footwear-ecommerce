@@ -115,7 +115,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"TEST UPDATE\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Nike Air Force 1 '07\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -123,7 +123,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:5000/api/products/653bf794b10e62b53c123570",
+							"raw": "localhost:5000/api/products/661041896d75c70949e45a0e",
 							"host": [
 								"localhost"
 							],
@@ -131,7 +131,7 @@
 							"path": [
 								"api",
 								"products",
-								"653bf794b10e62b53c123570"
+								"661041896d75c70949e45a0e"
 							]
 						}
 					},
@@ -219,7 +219,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"test@gmail.com\",\r\n    \"password\": \"test\"\r\n}",
+							"raw": "{\r\n    \"email\": \"admin@gmail.com\",\r\n    \"password\": \"admin\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -334,7 +334,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTE3YjdiMTUzZWQ4MWIyNmVlMDYzNSIsImVtYWlsIjoidGVzdEBnbWFpbC5jb20iLCJpYXQiOjE3MDE4MzM4NTgsImV4cCI6MTcwNDQyNTg1OH0.DcQ6WEB0yvwvpFOmz-E9w8hSidsXzlmvPURK25JXAG0",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MTA0YWMwMTEyMjI3NDE4OTdkZjZhNCIsImVtYWlsIjoidGVzdDFAZ21haWwuY29tIiwiaWF0IjoxNzEyNTIxNzAwLCJleHAiOjE3MTUxMTM3MDB9.oner1ZoIEZX_aNY-UA7vkncWFOQHn8kKBjgA7i7nGNc",
 								"type": "text"
 							}
 						],
@@ -427,6 +427,159 @@
 									"value": "",
 									"disabled": true
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove user cart",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MTA0YWMwMTEyMjI3NDE4OTdkZjZhNCIsImVtYWlsIjoidGVzdDFAZ21haWwuY29tIiwiaWF0IjoxNzEyNTIxNzAwLCJleHAiOjE3MTUxMTM3MDB9.oner1ZoIEZX_aNY-UA7vkncWFOQHn8kKBjgA7i7nGNc",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:5000/api/cart/removeCart",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"cart",
+								"removeCart"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "Get all orders",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MTA0ODI1MTEyMjI3NDE4OTdkZjY3NSIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwiaWF0IjoxNzEyNDIxODA2LCJleHAiOjE3MTUwMTM4MDZ9.1iFA8DXE_j2todklo2hR6TBhlhGVdAiHvKeynU_pv7E",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:5000/api/orders/getAllOrders",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"orders",
+								"getAllOrders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MTA0MWE0MGQzMDQ4YTYyZTZiYjVjMiIsImVtYWlsIjoidGVzdEBnbWFpbC5jb20iLCJpYXQiOjE3MTI0Mjc3MTIsImV4cCI6MTcxNTAxOTcxMn0.pI6BHkIHHCf7pBh2hXpSqGMtSMqbtlrr_JsUHuBFjs8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"661041a40d3048a62e6bb5c2\",\r\n    \"products\": [\r\n        {\r\n            \"productId\": \"661041896d75c70949e45a0f\",\r\n            \"name\": \"Nike Air Jordan 4 Retro\",\r\n            \"image\": \"https://m.media-amazon.com/images/I/51WdJo6TaoL._AC_SX695_.jpg\",\r\n            \"brand\": \"Nike\",\r\n            \"quantity\": 1,\r\n            \"price\": 160,\r\n            \"size\": 7.5,\r\n            \"_id\": \"66117a6b80ba3a8d1ac1d0b2\"\r\n        },\r\n        {\r\n            \"productId\": \"661041896d75c70949e45a0e\",\r\n            \"name\": \"Nike Air Force 1 '07\",\r\n            \"image\": \"https://m.media-amazon.com/images/I/51LLTTw8GJL._AC_SX695_.jpg\",\r\n            \"brand\": \"Nike\",\r\n            \"quantity\": 1,\r\n            \"price\": 115,\r\n            \"size\": 10,\r\n            \"_id\": \"66117acb80ba3a8d1ac1d0c5\"\r\n        }\r\n    ],\r\n    \"totalCost\": 999.99,\r\n    \"billingAddress\": \"Toronto\",\r\n    \"shippingAddress\": \"Toronto 11\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5000/api/orders/create",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"orders",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get order by user id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MTA0YWMwMTEyMjI3NDE4OTdkZjZhNCIsImVtYWlsIjoidGVzdDFAZ21haWwuY29tIiwiaWF0IjoxNzEyNTc5MTY3LCJleHAiOjE3MTUxNzExNjd9._iBmrBWJj0xLit0C2mEYle4AxYPHnUX6EulJtZ64VMk",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:5000/api/orders/getOrderByUserId",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"orders",
+								"getOrderByUserId"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update order by orderID",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MTA0YWMwMTEyMjI3NDE4OTdkZjZhNCIsImVtYWlsIjoidGVzdDFAZ21haWwuY29tIiwiaWF0IjoxNzEyNTc5MTY3LCJleHAiOjE3MTUxNzExNjd9._iBmrBWJj0xLit0C2mEYle4AxYPHnUX6EulJtZ64VMk",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"status\": \"Approved\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5000/api/orders/661305eb8e38710562926993",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"orders",
+								"661305eb8e38710562926993"
 							]
 						}
 					},
