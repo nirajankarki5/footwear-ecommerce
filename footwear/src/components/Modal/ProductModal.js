@@ -13,11 +13,11 @@ const ProductModal = ({ setShowModal, edit }) => {
         id="defaultModal"
         tabIndex="-1"
         aria-hidden="true"
-        className="absolute left-0 top-0 z-[5000] m-2 items-center justify-center overflow-y-auto overflow-x-hidden rounded-lg bg-white sm:w-max sm:translate-y-[-50%] md:inset-0 md:h-full md:translate-x-[-30%] lg:translate-x-[-100%] lg:translate-y-0 xl:translate-x-[-80%]"
+        className="absolute left-0 top-0 z-[5000] w-full items-center justify-center overflow-y-auto overflow-x-hidden rounded-lg md:mx-auto"
       >
-        <div className="relative h-full w-full max-w-2xl md:h-auto">
-          <div className="relative rounded-lg bg-white p-2 shadow dark:bg-gray-800 sm:p-5">
-            <div className="mb-4 flex items-center justify-between rounded-t border-b pb-4 dark:border-gray-600 sm:mb-5">
+        <div className="fixed m-2 h-full overflow-y-scroll rounded-md bg-white md:left-[50%] md:mx-auto md:w-2/3 md:translate-x-[-50%] lg:w-[50rem]">
+          <div className="relative mb-2 rounded-lg bg-white p-2 shadow dark:bg-gray-800 sm:p-5">
+            <div className="mb-4 flex items-center justify-between rounded-t border-b pb-4 dark:border-gray-600 sm:mb-2">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                 Add Product
               </h3>
