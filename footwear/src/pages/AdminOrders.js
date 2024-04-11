@@ -30,6 +30,7 @@ function AdminOrders() {
     }
   };
 
+  console.log(orders);
   useEffect(() => {
     window.scrollTo(0, 0);
     const tokenString = localStorage.getItem("token");
@@ -56,20 +57,17 @@ function AdminOrders() {
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         {!isLoading &&
           orders.map((order) => (
-            <div
-              key={order._id}
-              className="h-min rounded bg-white p-4 shadow-md"
-            >
+            <div key={order._id} className="rounded bg-white p-4 shadow-md">
               <table className="w-full">
                 <tbody>
                   <tr>
-                    <td className="font-semibold">Order ID:</td>
-                    <td>{order._id}</td>
+                    <td className="font-semibold">User:</td>
+                    <td>{order.userId.email}</td>
                   </tr>
-                  <tr>
+                  {/* <tr>
                     <td className="font-semibold">User ID:</td>
                     <td>{order.userId}</td>
-                  </tr>
+                  </tr> */}
                   <tr>
                     <td className="font-semibold">Products:</td>
                     <td>
@@ -81,10 +79,13 @@ function AdminOrders() {
                               className="text-sm leading-4 text-blue-800"
                             >
                               {product.name}, &nbsp;
-                              <span className="font-semibold">
-                                Size: {product.size}
-                              </span>
                             </Link>
+                            <p className="text-xs font-semibold">
+                              Size: {product.size + " "}
+                              <span className="font-semibold">
+                                Quantity: {product.quantity}
+                              </span>
+                            </p>
                           </li>
                         ))}
                       </ul>
@@ -119,7 +120,7 @@ function AdminOrders() {
                 </tbody>
               </table>
               {order.status === "Pending" && (
-                <div className="mt-4 flex justify-between">
+                <div className="mt-4 flex items-end justify-between self-end">
                   <button
                     onClick={() => {
                       handleStatusChange("Approved", order._id);

@@ -2,7 +2,10 @@ const Cart = require("../models/Cart");
 const Order = require("../models/Order");
 
 const getAllOrders = async (req, res) => {
-  const orders = await Order.find({}).sort({ createdAt: -1 });
+  const orders = await Order.find({})
+    .populate("userId", "email")
+    .sort({ createdAt: -1 });
+
   res.status(200).json(orders);
 };
 

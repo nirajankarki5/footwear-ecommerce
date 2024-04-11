@@ -21,7 +21,10 @@ export const fetchOrders = createAsyncThunk(
         },
       });
       const data = await response.json();
-      return data;
+
+      // Only show orders that are Pending
+      const filteredOrders = data.filter((item) => item.status === "Pending");
+      return filteredOrders;
     } catch (error) {
       console.log(error);
       return [];
