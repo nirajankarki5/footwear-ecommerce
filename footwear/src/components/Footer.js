@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Footer() {
   return (
@@ -15,7 +16,7 @@ function Footer() {
         <div>
           <h1 className="mb-4 text-xl font-medium lg:text-2xl">Products</h1>
           <div className="flex flex-col gap-2 text-sm text-gray-300 md:text-base lg:gap-4 lg:text-lg">
-            <p>All Products</p>
+            <Link to={"search"}>All Products</Link>
             <p>Shoes</p>
             <p>Apparel</p>
           </div>

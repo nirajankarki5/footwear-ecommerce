@@ -109,4 +109,10 @@ const products = [
   },
 ];
 
-module.exports = products;
+const admin = {
+  email: "admin@gmail.com",
+  password: "Admin@123",
+  userType: "Admin",
+};
+
+module.exports = { products, admin };

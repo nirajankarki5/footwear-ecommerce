@@ -93,9 +93,9 @@ export function login({ email, password }) {
           type: "user/setNetworkError",
           payload: "Invalid credentials",
         });
-        return;
+        return { status: "error" };
       }
-      return { status: "success", userType: data.userType };
+      return { status: "success", userType: data?.userType };
     } catch (error) {
       console.log(error);
       return;
