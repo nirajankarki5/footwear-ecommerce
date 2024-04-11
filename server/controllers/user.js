@@ -1,3 +1,11 @@
+/*
+Submitted By :
+  Ajay Shrestha (C0885384)  
+  Gaurab Pokharel (C0886046)
+  Nirajan Karki (C0885390)
+  Sakar Thapa (C0890972)
+*/
+
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
 const CustomAPIError = require("../errors/custom-error");
