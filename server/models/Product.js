@@ -19,10 +19,11 @@ const ProductSchema = new mongoose.Schema({
   },
   brand: {
     type: String,
-    enum: {
-      values: ["Nike", "Under Armour", "New Balance"],
-      message: "{VALUE} is not supported",
-    },
+    required: true,
+    // enum: {
+    //   values: ["Nike", "Under Armour", "New Balance"],
+    //   message: "{VALUE} is not supported",
+    // },
   },
   sizes: {
     type: [String],

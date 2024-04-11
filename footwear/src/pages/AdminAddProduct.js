@@ -186,7 +186,7 @@ const AdminAddProduct = ({ edit = false, setShowModal }) => {
             className="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
             id="brand"
             type="text"
-            placeholder="Brand"
+            placeholder="Brand (ex. Nike, New Balance, Under Armour)"
             name="brand"
             value={product.brand}
             onChange={handleChange}
