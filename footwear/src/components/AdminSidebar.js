@@ -1,10 +1,3 @@
-/*
-Submitted By :
-  Ajay Shrestha (C0885384)  
-  Gaurab Pokharel (C0886046)
-  Nirajan Karki (C0885390)
-  Sakar Thapa (C0890972)
-*/
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { HiBars3BottomLeft } from "react-icons/hi2";

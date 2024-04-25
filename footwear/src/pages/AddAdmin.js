@@ -1,11 +1,3 @@
-/*
-Submitted By :
-  Ajay Shrestha (C0885384)  
-  Gaurab Pokharel (C0886046)
-  Nirajan Karki (C0885390)
-  Sakar Thapa (C0890972)
-*/
-
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setNetworkError, signup } from "../features/user/userSlice";
