@@ -22,17 +22,17 @@ function Signup() {
       setError("Email and password both are required");
       return;
     }
-    // Error msg for password validation
-    const passwordPattern =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{5,}$/;
-    if (!passwordPattern.test(password)) {
-      setError(
-        "Password must contain at least 5 characters, including uppercase, lowercase letters, special character and numbers.",
-      );
-      return;
-    } else {
-      setError("");
-    }
+    // // Error msg for password validation
+    // const passwordPattern =
+    //   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{5,}$/;
+    // if (!passwordPattern.test(password)) {
+    //   setError(
+    //     "Password must contain at least 5 characters, including uppercase, lowercase letters, special character and numbers.",
+    //   );
+    //   return;
+    // } else {
+    //   setError("");
+    // }
 
     if (repassword !== password) {
       setError("Passwords do not match");

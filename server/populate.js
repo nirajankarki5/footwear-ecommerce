@@ -11,11 +11,13 @@ const start = async () => {
     await Product.deleteMany();
     await Product.create(products);
 
+    // check if Admin already exists
     const user = await User.findOne({
       userType: "Admin",
       email: "admin@gmail.com",
     });
 
+    // if admin exists, delete it and create again
     if (user) {
       await User.deleteOne({ email: user.email });
     }
